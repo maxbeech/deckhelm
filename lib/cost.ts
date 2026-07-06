@@ -19,7 +19,8 @@ const DECK_SQFT: Record<Decking, [number, number]> = {
   hardwood: [11, 24],
 };
 
-export interface CostItem { label: string; low: number; high: number; detail: string }
+export type CostKind = "decking" | "substructure" | "footings" | "railing" | "stairs" | "permit";
+export interface CostItem { kind: CostKind; label: string; low: number; high: number; detail: string }
 export interface CostResult {
   items: CostItem[];
   totalLow: number;
@@ -72,13 +73,13 @@ export function computeCost(opts: {
   const permitHigh = 500;
 
   const items: CostItem[] = [
-    { label: `Decking — ${DECKING_LABEL[opts.decking]}`, low: money(deckLow), high: money(deckHigh), detail: `${area} sq ft · ~${boards16ft} × 16′ boards` },
-    { label: "Substructure (joists, beam, posts, hardware)", low: money(subLow), high: money(subHigh), detail: `${area} sq ft framing` },
-    { label: "Footings (concrete piers)", low: money(footLow), high: money(footHigh), detail: `${opts.postCount} posts` },
+    { kind: "decking", label: `Decking: ${DECKING_LABEL[opts.decking]}`, low: money(deckLow), high: money(deckHigh), detail: `${area} sq ft · ~${boards16ft} × 16′ boards` },
+    { kind: "substructure", label: "Substructure (joists, beam, posts, hardware)", low: money(subLow), high: money(subHigh), detail: `${area} sq ft framing` },
+    { kind: "footings", label: "Footings (concrete piers)", low: money(footLow), high: money(footHigh), detail: `${opts.postCount} posts` },
   ];
-  if (railingLinFt > 0) items.push({ label: "Railing / guard", low: money(railLow), high: money(railHigh), detail: `${railingLinFt} lin ft` });
-  if (opts.hasStairs) items.push({ label: "Stairs", low: money(stairLow), high: money(stairHigh), detail: `${opts.stairTreads} treads` });
-  items.push({ label: "Permit + fasteners + misc", low: permitLow, high: permitHigh, detail: "allowance" });
+  if (railingLinFt > 0) items.push({ kind: "railing", label: "Railing / guard", low: money(railLow), high: money(railHigh), detail: `${railingLinFt} lin ft` });
+  if (opts.hasStairs) items.push({ kind: "stairs", label: "Stairs", low: money(stairLow), high: money(stairHigh), detail: `${opts.stairTreads} treads` });
+  items.push({ kind: "permit", label: "Permit + fasteners + misc", low: permitLow, high: permitHigh, detail: "allowance" });
 
   const totalLow = items.reduce((s, i) => s + i.low, 0);
   const totalHigh = items.reduce((s, i) => s + i.high, 0);

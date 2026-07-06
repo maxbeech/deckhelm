@@ -1,15 +1,15 @@
-# DeckCalc HQ
+# DeckHelm
 
-Free deck building code calculator — sizes deck **joists, beams, posts, footings and stairs**
+Free deck building code calculator: sizes deck **joists, beams, posts, footings and stairs**
 to the real **IRC R507 / AWC DCA6** prescriptive deck code, with each US state's frost depth and a
 permit-ready breakdown.
 
-Live: https://deckcalchq.vercel.app
+Live: https://deckhelm.com
 
 ## What it does
 
 - **Joist & beam sizing** straight from the IRC Table R507.6 (joists) and R507.5 (beams) span
-  tables — by lumber size, spacing and species (Southern Pine, Douglas Fir-Larch/Hem-Fir/SPF,
+  tables, by lumber size, spacing and species (Southern Pine, Douglas Fir-Larch/Hem-Fir/SPF,
   Redwood/Cedar group). No fabricated numbers; values are transcribed from the code.
 - **Footing size** from tributary post load ÷ soil bearing (IRC R507.3), and **footing depth**
   below the frost line for the chosen state (IRC R403.1.4).
@@ -17,7 +17,7 @@ Live: https://deckcalchq.vercel.app
 - **Stair layout** (risers, treads, total run, landing) to IRC R311.7, **guard height** to R312.
 - **Scale framing diagram** (SVG plan view of joists, beam, posts & footings).
 - **Itemized cost & materials** (`lib/cost.ts`): decking by material, board/screw counts,
-  substructure, footings, railing, stairs, permit — DIY-material to contractor-installed range.
+  substructure, footings, railing, stairs, permit, ranging from DIY-material to contractor-installed.
 - **Full span tables** (joist R507.6 × 3 species, beam R507.5) rendered from the same data the
   engine uses (single source of truth), and a **/methodology** page citing every code source.
 
@@ -30,23 +30,51 @@ Live: https://deckcalchq.vercel.app
 ## Monetisation
 
 - **Free** calculator (the SEO wedge).
-- **Pro** ($29 one-time) permit-ready deck plan PDF — Stripe checkout, env-gated
+- **Affiliate commerce**: each cost-breakdown line item (`lib/affiliate.ts`) links to a real Amazon
+  search for that material: decking, hardware, concrete, railing, stair stock. Works unconfigured
+  (a real, untagged search); set `NEXT_PUBLIC_AMAZON_TAG` (Amazon Associates) to start earning.
+- **Contractor lead-gen** (`/find-a-deck-builder`): a homeowner lead form posts to `/api/lead`,
+  env-gated on `RESEND_API_KEY` + `LEAD_NOTIFY_EMAIL` (optionally `LEAD_FROM_EMAIL`), degrades to
+  a clear 503 + fallback email address when unset, never a silent drop.
+- **Pro** ($29 one-time) permit-ready deck plan PDF: Stripe checkout, env-gated
   (`STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`), degrades gracefully when unset.
-- Deck-builder lead-gen network.
+
+None of the above third-party keys are set in this Vercel project yet; see "Go live" below.
+
+## Go live: required environment variables
+
+All optional, all degrade gracefully when unset (free tools and content stay fully functional).
+Set in Vercel → Project → Settings → Environment Variables:
+
+| Variable | Used for | Notes |
+|---|---|---|
+| `NEXT_PUBLIC_AMAZON_TAG` | Affiliate commerce | Your Amazon Associates tracking ID, e.g. `deckhelm-20` |
+| `RESEND_API_KEY` | Lead-gen email | From a [Resend](https://resend.com) account |
+| `LEAD_NOTIFY_EMAIL` | Lead-gen email | Inbox that receives new homeowner leads |
+| `LEAD_FROM_EMAIL` | Lead-gen email | Optional; defaults to Resend's sandbox sender until `deckhelm.com` is verified in Resend |
+| `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID` | Pro checkout | From a Stripe account |
+
+## Design
+
+A "builder's spec-plate" visual system, not a default Tailwind template: warm paper/ink palette
+with a burnt-orange accent (replaces the generic stone/amber defaults), a serif display face
+(Fraunces) for headings paired with a technical monospace (IBM Plex Mono) for measurements and
+data, sharp-edged cards instead of rounded-everything, and a faint blueprint grid on the page
+background. Tokens live in `app/globals.css`.
 
 ## Stack
 
 Next.js 16 (App Router) · Tailwind CSS 4 · TypeScript · tsx tests. Free calculator is pure
-client-side — no database.
+client-side, no database.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm test         # validates the engine against published IRC R507 span values
+npm run dev
+npm test         # validates the engine against published IRC R507 span tables
 npm run build
 ```
 
-> Planning aid only. Local amendments vary — confirm member sizes, footing depth and connections
+> Planning aid only. Local amendments vary; confirm member sizes, footing depth and connections
 > with your building department before you build.

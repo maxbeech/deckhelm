@@ -13,7 +13,7 @@ export default function CheckoutButton() {
       const res = await fetch("/api/checkout", { method: "POST" });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; return; }
-      setMsg(data.error ?? "Checkout is not available yet — please check back soon.");
+      setMsg(data.error ?? "Checkout is not available yet. Please check back soon.");
     } catch {
       setMsg("Could not start checkout. Please try again.");
     } finally {
@@ -24,10 +24,10 @@ export default function CheckoutButton() {
   return (
     <div>
       <button onClick={start} disabled={loading}
-        className="w-full rounded-lg bg-amber-700 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600 disabled:opacity-60">
+        className="w-full rounded-sm bg-rust px-4 py-2 text-sm font-medium text-white hover:bg-rust-dark disabled:opacity-60">
         {loading ? "Starting…" : "Get my permit-ready deck plan"}
       </button>
-      {msg && <p className="mt-2 text-center text-xs text-stone-500">{msg}</p>}
+      {msg && <p className="mt-2 text-center text-xs text-ink-soft">{msg}</p>}
     </div>
   );
 }

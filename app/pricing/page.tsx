@@ -4,8 +4,8 @@ import CheckoutButton from "@/components/CheckoutButton";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing — Permit-Ready Deck Plans",
-  description: "The DeckCalc HQ calculator is free forever. Upgrade to a permit-ready deck plan PDF with stamped framing, footing schedule and material list.",
+  title: "Pricing: Permit-Ready Deck Plans",
+  description: "The DeckHelm calculator is free forever. Upgrade to a permit-ready deck plan PDF with stamped framing, footing schedule and material list.",
   alternates: { canonical: `${SITE.url}/pricing` },
 };
 
@@ -29,46 +29,55 @@ export default function Pricing() {
   return (
     <>
       <div className="text-center">
-        <h1 className="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl">Simple, honest pricing</h1>
-        <p className="mx-auto mt-2 max-w-xl text-stone-600">
-          The calculator is free forever. When you&apos;re ready to pull a permit, turn your numbers into a plan
+        <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Simple, honest pricing</h1>
+        <p className="mx-auto mt-2 max-w-xl text-ink-soft">
+          The calculator is free forever. When you're ready to pull a permit, turn your numbers into a plan
           the inspector will accept.
         </p>
       </div>
 
       <div className="mx-auto mt-8 grid max-w-3xl gap-6 sm:grid-cols-2">
-        <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-          <div className="text-sm font-semibold text-stone-500 uppercase">Free</div>
-          <div className="mt-1 text-3xl font-bold text-stone-900">$0</div>
-          <p className="mt-1 text-sm text-stone-500">The full deck code calculator</p>
-          <ul className="mt-4 space-y-2 text-sm text-stone-600">
+        <div className="border border-line bg-card p-6">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wide text-ink-soft">Free</div>
+          <div className="mt-1 font-display text-3xl font-semibold text-ink">$0</div>
+          <p className="mt-1 text-sm text-ink-soft">The full deck code calculator</p>
+          <ul className="mt-4 space-y-2 text-sm text-ink-soft">
             {freeFeatures.map((f) => (
-              <li key={f} className="flex gap-2"><span className="text-emerald-500">✓</span><span>{f}</span></li>
+              <li key={f} className="flex gap-2"><span className="text-teal">✓</span><span>{f}</span></li>
             ))}
           </ul>
-          <Link href="/" className="mt-6 block rounded-lg border border-stone-300 px-4 py-2 text-center text-sm font-medium text-stone-700 hover:bg-stone-50">
+          <Link href="/" className="mt-6 block border border-line-strong px-4 py-2 text-center text-sm font-medium text-ink hover:bg-paper">
             Use the calculator
           </Link>
         </div>
 
-        <div className="rounded-2xl border-2 border-amber-300 bg-white p-6 shadow-sm">
-          <div className="text-sm font-semibold text-amber-700 uppercase">Pro plan</div>
-          <div className="mt-1 text-3xl font-bold text-stone-900">$29<span className="text-base font-medium text-stone-500"> one-time</span></div>
-          <p className="mt-1 text-sm text-stone-500">Permit-ready deck plan PDF</p>
-          <ul className="mt-4 space-y-2 text-sm text-stone-600">
+        <div className="border-2 border-rust-line bg-card p-6">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wide text-rust">Pro plan</div>
+          <div className="mt-1 font-display text-3xl font-semibold text-ink">$29<span className="text-base font-medium text-ink-soft"> one-time</span></div>
+          <p className="mt-1 text-sm text-ink-soft">Permit-ready deck plan PDF</p>
+          <ul className="mt-4 space-y-2 text-sm text-ink-soft">
             {proFeatures.map((f) => (
-              <li key={f} className="flex gap-2"><span className="text-amber-500">✓</span><span>{f}</span></li>
+              <li key={f} className="flex gap-2"><span className="text-rust">✓</span><span>{f}</span></li>
             ))}
           </ul>
           <div className="mt-6"><CheckoutButton /></div>
         </div>
       </div>
 
-      <section className="mx-auto mt-10 max-w-3xl rounded-2xl border border-stone-200 bg-stone-100 p-6 text-center text-sm text-stone-600">
-        <h2 className="text-base font-semibold text-stone-800">Building pros &amp; deck companies</h2>
+      <section className="mx-auto mt-10 max-w-3xl border border-rust-line bg-rust-tint p-6 text-center text-sm text-ink-soft">
+        <h2 className="font-display text-base font-semibold text-ink">Would rather hire it out?</h2>
         <p className="mt-2">
-          Run a deck-building business? We send qualified homeowner leads from this calculator to vetted
-          contractors. Email <span className="font-medium text-stone-800">hello@deckcalchq.com</span> to join the network.
+          Skip the Pro plan and{" "}
+          <Link href="/find-a-deck-builder" className="font-medium text-rust underline">get free quotes from local deck builders</Link>{" "}
+          instead: tell us about your project and we'll pass it to a contractor in your area.
+        </p>
+      </section>
+
+      <section className="mx-auto mt-6 max-w-3xl border border-line bg-paper-dim p-6 text-center text-sm text-ink-soft">
+        <h2 className="font-display text-base font-semibold text-ink">Building pros & deck companies</h2>
+        <p className="mt-2">
+          Run a deck-building business? We send qualified homeowner leads from this calculator to
+          contractors. Email <span className="font-medium text-ink">hello@deckhelm.com</span> to join the network.
         </p>
       </section>
     </>

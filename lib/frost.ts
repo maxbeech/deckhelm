@@ -1,7 +1,7 @@
 // Representative minimum footing depths (inches below grade) by US state, used to
 // set deck pier depth below the frost line per IRC R403.1.4 / R507.3. Frost depth
 // varies within a state (elevation, microclimate) so these are typical permit
-// values — every state page tells the reader to confirm with their local building
+// values; every state page tells the reader to confirm with their local building
 // department. Anchored to published references (Decks.com frost map, state amendments).
 // Frost-free southern states still require ≥12" to reach stable bearing soil (IBC).
 

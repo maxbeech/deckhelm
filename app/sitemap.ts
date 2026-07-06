@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE.url}/calculators`, lastModified: now, priority: 0.8 },
     { url: `${SITE.url}/states`, lastModified: now, priority: 0.7 },
     { url: `${SITE.url}/blog`, lastModified: now, priority: 0.7 },
+    { url: `${SITE.url}/find-a-deck-builder`, lastModified: now, priority: 0.8 },
     { url: `${SITE.url}/pricing`, lastModified: now, priority: 0.6 },
     { url: `${SITE.url}/methodology`, lastModified: now, priority: 0.5 },
   ];

@@ -39,6 +39,7 @@ export function computeRailing(raw: RailingInputs): RailingResult {
   const railLengthFt = Math.max(1, raw.railLengthFt || 0);
   const postSpacingFt = Math.min(8, Math.max(2, raw.postSpacingFt || 6));
   const maxGap = Math.min(3.9, Math.max(2, raw.maxGapIn || 3.5)); // never allow ≥4"
+  const postWidthIn = Math.min(7.5, Math.max(1.5, raw.postWidthIn || 3.5));
   const w = BALUSTER_WIDTH[raw.style];
   const warnings: string[] = [];
 
@@ -46,14 +47,14 @@ export function computeRailing(raw: RailingInputs): RailingResult {
   const totalPosts = sections + 1;
   // Clear opening within a section = post-to-post spacing minus one post width.
   const sectionSpacingIn = (railLengthFt * 12) / sections;
-  const sectionClearIn = Math.max(1, sectionSpacingIn - raw.postWidthIn);
+  const sectionClearIn = Math.max(1, sectionSpacingIn - postWidthIn);
 
-  // Smallest baluster count whose even gap is ≤ maxGap.
-  // gaps = n+1; evenGap = (clear - n*w)/(n+1) ≤ maxGap → n ≥ (clear - maxGap)/(w + maxGap)
+  // Smallest baluster count whose even gap is <= maxGap.
+  // gaps = n+1; evenGap = (clear - n*w)/(n+1) <= maxGap, so n >= (clear - maxGap)/(w + maxGap)
   const n = Math.max(1, Math.ceil((sectionClearIn - maxGap) / (w + maxGap)));
   const evenGapIn = (sectionClearIn - n * w) / (n + 1);
   const gapOk = evenGapIn > 0 && evenGapIn < 4;
-  if (!gapOk) warnings.push("Adjust post spacing or baluster size — the even gap can't be kept under 4\" as entered.");
+  if (!gapOk) warnings.push("Adjust post spacing or baluster size: the even gap can't be kept under 4\" as entered.");
 
   return {
     sections,

@@ -14,22 +14,22 @@ const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-sm font-medium text-stone-700">{label}</span>
+      <span className="block text-sm font-medium text-ink">{label}</span>
       {children}
-      {hint && <span className="mt-0.5 block text-xs text-stone-500">{hint}</span>}
+      {hint && <span className="mt-0.5 block text-xs text-ink-soft">{hint}</span>}
     </label>
   );
 }
-const ctl = "mt-1 w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 focus:outline-none";
+const ctl = "mt-1 w-full rounded-sm border border-line-strong bg-card px-3 py-2 text-sm text-ink focus:border-rust focus:ring-2 focus:ring-rust-line focus:outline-none";
 const sel = (e: React.FocusEvent<HTMLInputElement>) => e.target.select();
 
 function Row({ label, value, sub, accent }: { label: string; value: string; sub?: string; accent?: boolean }) {
   return (
-    <div className="flex items-baseline justify-between border-t border-stone-100 py-2">
-      <span className="text-sm text-stone-600">{label}</span>
+    <div className="flex items-baseline justify-between border-t border-paper-dim py-2">
+      <span className="text-sm text-ink-soft">{label}</span>
       <span className="text-right">
-        <span className={`font-semibold tabular-nums ${accent ? "text-amber-700" : "text-stone-900"}`}>{value}</span>
-        {sub && <span className="ml-2 text-xs text-stone-500">{sub}</span>}
+        <span className={`font-mono font-semibold tabular-nums ${accent ? "text-rust" : "text-ink"}`}>{value}</span>
+        {sub && <span className="ml-2 text-xs text-ink-soft">{sub}</span>}
       </span>
     </div>
   );
@@ -61,23 +61,23 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <div className="space-y-4 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm print:hidden">
+      <div className="space-y-4 rounded-sm border border-line bg-card p-5 print:hidden">
         <div className="grid grid-cols-2 gap-4">
           <Field label="Deck width (ft)" hint="Along the house">
-            <input type="number" min={2} max={60} className={ctl} value={inp.width} onFocus={sel}
+            <input type="number" min={2} max={60} className={ctl} value={inp.width || ""} onFocus={sel}
               onChange={(e) => set("width", Math.max(0, +e.target.value || 0))} />
           </Field>
           <Field label="Projection (ft)" hint="Out from the house = joist span">
-            <input type="number" min={2} max={40} className={ctl} value={inp.projection} onFocus={sel}
+            <input type="number" min={2} max={40} className={ctl} value={inp.projection || ""} onFocus={sel}
               onChange={(e) => set("projection", Math.max(0, +e.target.value || 0))} />
           </Field>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <Field label="Joist spacing">
             <select className={ctl} value={inp.spacing} onChange={(e) => set("spacing", +e.target.value as Spacing)}>
-              <option value={12}>12&quot; o.c.</option>
-              <option value={16}>16&quot; o.c.</option>
-              <option value={24}>24&quot; o.c.</option>
+              <option value={12}>12" o.c.</option>
+              <option value={16}>16" o.c.</option>
+              <option value={24}>24" o.c.</option>
             </select>
           </Field>
           <Field label="Deck height (ft)" hint="Surface above grade">
@@ -95,11 +95,11 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
             {US_STATES.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
           </select>
         </Field>
-        <button type="button" onClick={() => setAdv((v) => !v)} className="text-xs font-medium text-amber-700 hover:text-amber-800">
+        <button type="button" onClick={() => setAdv((v) => !v)} className="text-xs font-medium text-rust hover:text-rust-dark">
           {adv ? "− Hide" : "+ Show"} advanced (override sizes, soil)
         </button>
         {adv && (
-          <div className="grid grid-cols-2 gap-4 rounded-xl bg-stone-50 p-3">
+          <div className="grid grid-cols-2 gap-4 rounded-sm bg-paper p-3">
             <Field label="Joist size">
               <select className={ctl} value={inp.joist} onChange={(e) => set("joist", e.target.value as JoistSize | "auto")}>
                 <option value="auto">Auto (smallest that passes)</option>
@@ -112,9 +112,9 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
                 {BEAM_SIZES.map((s) => <option key={s} value={s}>{s.replace("-", " × ")}</option>)}
               </select>
             </Field>
-            <Field label="Soil bearing (psf)" hint="IRC R401.4.1 — 1,500 default">
-              <input type="number" min={1500} step={500} className={ctl} value={inp.soilBearing} onFocus={sel}
-                onChange={(e) => set("soilBearing", +e.target.value || 1500)} />
+            <Field label="Soil bearing (psf)" hint="IRC R401.4.1, 1,500 default">
+              <input type="number" min={1500} step={500} className={ctl} value={inp.soilBearing || ""} onFocus={sel}
+                onChange={(e) => set("soilBearing", +e.target.value || 0)} />
             </Field>
           </div>
         )}
@@ -122,29 +122,38 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
 
       <div className="space-y-4">
         {focus && (
-          <div className="rounded-2xl border-2 border-amber-300 bg-amber-50 p-5">
-            <div className="text-xs font-semibold tracking-wide text-stone-500 uppercase">{headline[0]}</div>
-            <div className="mt-1 text-3xl font-bold text-stone-900">{headline[1]}</div>
-            <div className="mt-1 text-sm text-stone-600">{headline[2]}</div>
+          <div className="border border-ink bg-ink p-5 text-paper">
+            <div className="font-mono text-xs font-medium tracking-wide text-paper/60 uppercase">{headline[0]}</div>
+            <div className="mt-1 font-mono text-3xl font-semibold tabular-nums">{headline[1]}</div>
+            <div className="mt-1 text-sm text-paper/70">{headline[2]}</div>
           </div>
         )}
         <div className="grid grid-cols-2 gap-4">
-          <div className={`rounded-2xl border p-5 ${r.joistOk ? "border-emerald-200 bg-emerald-50" : "border-rose-200 bg-rose-50"}`}>
-            <div className="text-xs font-semibold tracking-wide text-stone-500 uppercase">Joists</div>
-            <div className="mt-1 text-2xl font-bold text-stone-900">{r.joistSize ?? "—"}</div>
-            <div className="mt-1 text-sm text-stone-600">{inp.spacing}&quot; o.c. · spans {ftIn(r.joistMaxSpanIn)} max</div>
+          <div className={`border-2 p-5 ${r.joistOk ? "border-teal bg-teal-tint" : "border-rose-300 bg-rose-50"}`}>
+            <div className="font-mono text-xs font-medium tracking-wide text-ink-soft uppercase">Joists</div>
+            {r.joistSize ? (
+              <>
+                <div className="mt-1 font-mono text-2xl font-semibold tabular-nums text-ink">{r.joistSize}</div>
+                <div className="mt-1 text-sm text-ink-soft">{inp.spacing}" o.c., spans {ftIn(r.joistMaxSpanIn)} max</div>
+              </>
+            ) : (
+              <>
+                <div className="mt-1 text-lg font-semibold text-rose-700">No prescriptive size</div>
+                <div className="mt-1 text-sm text-ink-soft">Projection exceeds the R507.6 table; see “Heads up” below.</div>
+              </>
+            )}
           </div>
-          <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-            <div className="text-xs font-semibold tracking-wide text-stone-500 uppercase">Beam</div>
-            <div className="mt-1 text-2xl font-bold text-stone-900">{r.beamSize.replace("-", " × ")}</div>
-            <div className="mt-1 text-sm text-stone-600">posts ≤ {ftIn(r.beamMaxPostSpacingIn)} apart</div>
+          <div className="border-2 border-rust bg-rust-tint p-5">
+            <div className="font-mono text-xs font-medium tracking-wide text-ink-soft uppercase">Beam</div>
+            <div className="mt-1 font-mono text-2xl font-semibold tabular-nums text-ink">{r.beamSize.replace("-", " × ")}</div>
+            <div className="mt-1 text-sm text-ink-soft">posts ≤ {ftIn(r.beamMaxPostSpacingIn)} apart</div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+        <div className="rounded-sm border border-line bg-card p-5">
           <div className="mb-1 flex items-center justify-between">
-            <div className="text-sm font-semibold text-stone-700">Code-compliant framing plan</div>
-            <button type="button" onClick={() => window.print()} className="text-xs font-medium text-amber-700 hover:text-amber-800 print:hidden">Print / save PDF</button>
+            <div className="text-sm font-semibold text-ink">Code-compliant framing plan</div>
+            <button type="button" onClick={() => window.print()} className="text-xs font-medium text-rust hover:text-rust-dark print:hidden">Print / save PDF</button>
           </div>
           <FramingDiagram width={sw} projection={sp} joistCount={r.joistCount}
             postCount={r.postCount} joistSize={r.joistSize} beamSize={r.beamSize} postSpacingIn={r.postSpacingIn} valid={r.valid} />
@@ -157,7 +166,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
           <Row label="Ledger fasteners" value={`½″ lag @ ${r.ledgerLagSpacingIn}″`} sub={`or bolt @ ${r.ledgerBoltSpacingIn}″ · R507.9`} accent={focus === "ledger"} />
           {r.stairs && <Row label="Stairs" value={`${r.stairs.risers} risers @ ${r.stairs.riserIn}″`} sub={`${r.stairs.treads} treads · ${ftIn(r.stairs.totalRunIn)} run`} accent={focus === "stair"} />}
           <Row label="Guardrail" value={r.needsGuard ? `${r.guardHeightIn}″ required` : "Optional (≤30″)"} sub="IRC R312" />
-          <p className="mt-3 text-xs text-stone-500">
+          <p className="mt-3 text-xs text-ink-soft">
             Member sizes read from the IRC R507.6 (joists) and R507.5 (beams) tables for No.&nbsp;2
             {" "}{SPECIES_LABEL[inp.species]} at 40&nbsp;psf live + 10&nbsp;psf dead. Footings from tributary load ÷
             soil bearing (R507.3); ledger fasteners per R507.9. Confirm with your local building department.
@@ -167,7 +176,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
         <CostBreakdown cost={cost} decking={decking} onDecking={setDecking} />
 
         {r.warnings.length > 0 && (
-          <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
+          <div className="rounded-sm border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">
             <div className="font-semibold">Heads up</div>
             <ul className="mt-1 list-disc space-y-1 pl-5">{r.warnings.map((w) => <li key={w}>{w}</li>)}</ul>
           </div>

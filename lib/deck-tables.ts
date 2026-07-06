@@ -8,7 +8,7 @@
 //   Joist spans  → IRC Table R507.6  (joist size × spacing × species)
 //   Beam spans   → IRC Table R507.5  (beam size × supported joist span × species)
 //
-// These are real code tables — not estimates — so a result here is exactly what a
+// These are real code tables, not estimates, so a result here is exactly what a
 // plans examiner checks against. Nothing on this site is fabricated.
 
 export type Species = "sp" | "dfhf" | "cedar";
@@ -30,7 +30,7 @@ export const BEAM_SIZES: BeamSize[] = [
 ];
 export const SPACINGS: Spacing[] = [12, 16, 24];
 
-// IRC Table R507.6 — Deck joist max spans (inches). [12" oc, 16" oc, 24" oc].
+// IRC Table R507.6: Deck joist max spans (inches). [12" oc, 16" oc, 24" oc].
 export const JOIST_SPAN: Record<Species, Record<JoistSize, [number, number, number]>> = {
   sp: {
     "2x6": [119, 108, 91],   // 9'11", 9'0", 7'7"
@@ -52,7 +52,7 @@ export const JOIST_SPAN: Record<Species, Record<JoistSize, [number, number, numb
   },
 };
 
-// IRC Table R507.5 — Deck beam max spans (inches), by supported joist span.
+// IRC Table R507.5: Deck beam max spans (inches), by supported joist span.
 // Columns correspond to JOIST_SPAN_COLS (feet). Cedar group uses the same column
 // as Douglas Fir-Larch/Hem-Fir (the IRC groups them).
 export const JOIST_SPAN_COLS = [6, 8, 10, 12, 14, 16, 18] as const;

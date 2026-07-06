@@ -45,6 +45,20 @@ const d = computeDeck(DEFAULT_DECK);
 check("default deck joist = 2x10", d.joistSize === "2x10", `${d.joistSize}`);
 check("default deck joists ok", d.joistOk);
 check("joist count = 13 across 16ft @16oc", d.joistCount === 13, `${d.joistCount}`);
+
+// --- Joist spacing must never exceed the code-table on-center value, even when the
+// deck width is not an exact multiple of the spacing (regression: previously floored
+// the joist count, which under-provided joists for most non-exact widths) ---
+for (const [widthFt, spacingIn] of [[13, 16], [14, 16], [18, 16], [22, 16], [17, 12], [19, 24]] as const) {
+  const dd = computeDeck({ ...DEFAULT_DECK, width: widthFt, spacing: spacingIn });
+  const actualSpacingIn = (widthFt * 12) / (dd.joistCount - 1);
+  check(
+    `joist spacing <= ${spacingIn}in o.c. at ${widthFt}ft width`,
+    actualSpacingIn <= spacingIn + 0.01,
+    `${actualSpacingIn.toFixed(2)}in actual, ${dd.joistCount} joists`,
+  );
+}
+
 check("at least 2 posts", d.postCount >= 2, `${d.postCount}`);
 check("post spacing <= beam max", d.postSpacingIn <= d.beamMaxPostSpacingIn + 0.01);
 check("footing load = trib x 50", d.footingLoadLb === Math.round(d.footingTribSqft * 50));

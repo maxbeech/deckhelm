@@ -1,11 +1,41 @@
 @import "tailwindcss";
 
-/* DeckCalc HQ ships a single, intentional LIGHT theme — every surface uses
-   explicit Tailwind colors (bg-stone-50, white cards, text-stone-900). We do
-   NOT honour prefers-color-scheme: a dark body background would sit behind the
-   light-theme text and make the hero unreadable. Background/colour are left to
-   the layout's Tailwind utilities (an unlayered `body{background}` rule would
-   otherwise override bg-stone-50 under Tailwind v4 cascade layers). */
+/* Single intentional light theme: warm paper + ink, not prefers-color-scheme aware.
+   A dark body background would sit behind the light-theme text and break the hero. */
+@theme {
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --color-paper: #faf6ee;
+  --color-paper-dim: #f0e8d8;
+  --color-card: #fffcf5;
+  --color-ink: #211b14;
+  --color-ink-soft: #6b6053;
+  --color-ink-faint: #948a7c;
+  --color-line: #ddd0b8;
+  --color-line-strong: #c2b092;
+  --color-rust: #b5410c;
+  --color-rust-dark: #8f3208;
+  --color-rust-tint: #f9e6d8;
+  --color-rust-line: #e3b78e;
+  --color-teal: #223d3a;
+  --color-teal-tint: #e6efec;
+  --color-teal-line: #b9d0c9;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(rgba(33, 27, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33, 27, 20, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  background-attachment: local;
+}
+
+::selection {
+  background: var(--color-rust);
+  color: var(--color-card);
 }

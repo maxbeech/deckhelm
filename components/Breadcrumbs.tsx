@@ -19,11 +19,11 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <nav className="mb-4 text-sm text-stone-500" aria-label="Breadcrumb">
+      <nav className="mb-4 text-sm text-ink-soft" aria-label="Breadcrumb">
         {items.map((c, i) => (
           <span key={c.name}>
             {i > 0 && " › "}
-            {c.href ? <Link href={c.href} className="hover:text-stone-700">{c.name}</Link> : <span className="text-stone-500">{c.name}</span>}
+            {c.href ? <Link href={c.href} className="hover:text-ink">{c.name}</Link> : <span className="text-ink-soft">{c.name}</span>}
           </span>
         ))}
       </nav>
