@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadForm from "@/components/LeadForm";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 604800; // 1 week: static reference content
@@ -73,7 +74,7 @@ export default function FindABuilder() {
             <h2 className="font-display text-base font-semibold text-ink">Run a deck-building business?</h2>
             <p className="mt-2">
               We send qualified homeowner leads from this calculator to contractors. Email{" "}
-              <span className="font-medium text-ink">hello@deckhelm.com</span> to join the network.
+              <ObfuscatedEmail className="font-medium text-ink underline" /> to join the network.
             </p>
           </div>
         </div>

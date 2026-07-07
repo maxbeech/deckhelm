@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CheckoutButton from "@/components/CheckoutButton";
+import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -77,7 +78,7 @@ export default function Pricing() {
         <h2 className="font-display text-base font-semibold text-ink">Building pros & deck companies</h2>
         <p className="mt-2">
           Run a deck-building business? We send qualified homeowner leads from this calculator to
-          contractors. Email <span className="font-medium text-ink">hello@deckhelm.com</span> to join the network.
+          contractors. Email <ObfuscatedEmail className="font-medium text-ink underline" /> to join the network.
         </p>
       </section>
     </>

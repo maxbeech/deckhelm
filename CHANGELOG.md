@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-07-07: Live services wired up + scraper-resistant email
+
+- **Resend + Stripe wired up**: `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`, `LEAD_FROM_EMAIL` (sending
+  domain `mail.deckhelm.com`), and `STRIPE_SECRET_KEY` (live in Production, test in Preview/
+  Development) are now set in Vercel and in local `.env.local` (gitignored, never committed).
+  `STRIPE_PRICE_ID` is still unset — checkout intentionally stays in "coming soon" mode until a
+  Product/Price is created in the Stripe Dashboard.
+- **Obfuscated public email** (`components/ObfuscatedEmail.tsx`): `hello@deckhelm.com` no longer
+  appears as plaintext in server-rendered HTML or the client JS bundle on `/pricing` and
+  `/find-a-deck-builder`. The address is stored reversed and only decoded client-side, post-hydration,
+  via `useEffect`; a `(at)/(dot)` fallback covers no-JS visitors. `test/monetisation.test.mts` asserts
+  the reversed constant still matches `SITE.email` so the two can't silently drift.
+
 ## 2026-07-06: Rebrand to DeckHelm
 
 - Renamed the product from DeckCalc HQ to **DeckHelm** (`deckhelm.com`) across `lib/site.ts`

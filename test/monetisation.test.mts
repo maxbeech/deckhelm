@@ -3,6 +3,8 @@
 // /find-a-deck-builder lead capture. Run: npm test
 import { affiliateQuery, amazonSearchUrl, AMAZON_TAG } from "../lib/affiliate.ts";
 import { isHoneypotFilled, leadEmailHtml, parseLead, validateLead, type LeadInput } from "../lib/lead.ts";
+import { REVERSED_EMAIL } from "../components/ObfuscatedEmail.tsx";
+import { SITE } from "../lib/site.ts";
 
 let pass = 0, fail = 0;
 function check(name: string, cond: boolean, detail = "") {
@@ -41,6 +43,13 @@ const xssLead: LeadInput = { name: "<script>alert(1)</script>", email: "a@b.com"
 const html = leadEmailHtml(xssLead);
 check("email HTML escapes injected markup", !html.includes("<script>"), html);
 check("email HTML keeps the escaped text visible", html.includes("&lt;script&gt;"));
+
+// --- components/ObfuscatedEmail.tsx ---
+check(
+  "obfuscated email matches SITE.email",
+  REVERSED_EMAIL.split("").reverse().join("") === SITE.email,
+  `${REVERSED_EMAIL} reversed !== ${SITE.email}`,
+);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 if (fail > 0) process.exit(1);
