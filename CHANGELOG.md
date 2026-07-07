@@ -5,8 +5,15 @@
 - **Resend + Stripe wired up**: `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`, `LEAD_FROM_EMAIL` (sending
   domain `mail.deckhelm.com`), and `STRIPE_SECRET_KEY` (live in Production, test in Preview/
   Development) are now set in Vercel and in local `.env.local` (gitignored, never committed).
-  `STRIPE_PRICE_ID` is still unset — checkout intentionally stays in "coming soon" mode until a
-  Product/Price is created in the Stripe Dashboard.
+- **Stripe checkout enabled in test mode**: created a test-mode Product (`prod_UqGvCevA4Qlvho`)
+  and Price (`price_1TqaNTLT1iVyVaO3fMzPLkj6`, $29.00 USD one-time, matching the Pro plan on
+  `/pricing`) via the Stripe CLI. `STRIPE_PRICE_ID` is set in Preview/Development only — Production
+  still has no price ID, so live checkout stays in "coming soon" mode until a live-mode Product/
+  Price is created and approved. End-to-end verified in a real browser: clicking "Get my
+  permit-ready deck plan" redirects to a live Stripe Checkout session for the correct product/amount.
+- Resend domain status for `mail.deckhelm.com` could not be verified: the API key provided is
+  send-only and Resend rejects domain-management calls from it (`resend-cli domains list` / `doctor`
+  confirm this). A full-access key is needed to check or complete domain verification.
 - **Obfuscated public email** (`components/ObfuscatedEmail.tsx`): `hello@deckhelm.com` no longer
   appears as plaintext in server-rendered HTML or the client JS bundle on `/pricing` and
   `/find-a-deck-builder`. The address is stored reversed and only decoded client-side, post-hydration,
