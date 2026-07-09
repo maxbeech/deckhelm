@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-07-09: Live checkout enabled in Production
+
+- **Stripe is now live**: created a live-mode Product (`prod_UqyRDqLbBhGbtx`) and Price
+  (`price_1TrGUWLquINEUvRkKGty0M3g`, $29.00 USD one-time) via the Stripe CLI against account
+  `acct_1TqZwILquINEUvRk` (confirmed `charges_enabled`/`payouts_enabled`/`details_submitted` all
+  true beforehand). `STRIPE_PRICE_ID` is now set in Vercel Production, alongside the existing live
+  `STRIPE_SECRET_KEY` — real customers hitting `/pricing` in production can now pay $29 for the Pro
+  plan. Local dev and Preview/Development keep using the separate test-mode Product/Price so no
+  real charge can ever come from a non-production environment.
+- Did not execute a real test purchase (would charge an actual card); verified via
+  `stripe get /v1/account` and the price/product creation responses instead.
+- Resend domain `mail.deckhelm.com` confirmed verified by the user directly in their dashboard
+  (the send-only API key still can't be used to check this programmatically — see 2026-07-07 entry).
+
 ## 2026-07-07: Live services wired up + scraper-resistant email
 
 - **Resend + Stripe wired up**: `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`, `LEAD_FROM_EMAIL` (sending
