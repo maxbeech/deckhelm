@@ -1,5 +1,51 @@
 # Changelog
 
+## 2026-07-09: Premium redesign + real Pro fulfilment
+
+A full product-quality overhaul: the site now reads like a seed-funded startup, and the Pro
+purchase actually delivers a product.
+
+### Design system (premium elevation, same "spec-plate" identity)
+- New shared UI primitives in `components/ui.tsx` (single source of truth): `Section` full-bleed
+  tonal bands (paper / dim / deep-ink / rust-tint), `Container`, `PageHeader`, `Eyebrow`,
+  `ButtonLink`/`buttonClass`, and `PhotoPlate` (framed, shadowed `next/image`).
+- Real deck photography, self-hosted and optimised to WebP in `public/photos/` (hero, timber-framing
+  authority band, construction detail, lakeside, fire-pit). `next.config.ts` sets AVIF/WebP + 1yr
+  cache. Sourced from Pexels (license-free).
+- `app/globals.css`: depth tokens (`--shadow-plate`/`-lg`), `.photo-plate`, dark-band blueprint grid,
+  deep-ink colour, print rules that hide site chrome so plans/prints come out clean.
+- `components/icons.tsx`: thin line-icon set for value props / steps.
+- Refactored `app/layout.tsx`: full-bleed `<main>`, logo mark (joist-and-beam SVG), primary CTA in
+  the header, 4-column footer, and a real mobile menu (`components/MobileNav.tsx`).
+
+### Pages
+- **Homepage** rebuilt as a landing narrative: hero + photo + honest trust stats → live calculator →
+  value props → how-it-works → dark authority/methodology band (real code citations) → calculators →
+  why-build-to-code + FAQ → guides → CTA band. No fabricated testimonials.
+- Every secondary page (calculators index + `[slug]`, states index + `[slug]`, blog index + `[slug]`,
+  methodology, pricing, find-a-builder, 404) re-laid on the new section system with consistent
+  headers, elevated cards and hover depth. `find-a-deck-builder` and `pricing` gained photo/visual
+  hierarchy.
+
+### Pro fulfilment — the revenue fix
+- **Before:** `/pricing` charged $29 (live) and delivered *nothing* — success redirected to a page
+  that ignored the status; no PDF existed anywhere. Copy also promised a "stamped" plan, contradicting
+  the "not an engineering stamp" disclaimer.
+- **Now:** a genuine deliverable. `components/PlanStudio.tsx` renders a permit-submittal packet from
+  the buyer's exact deck — editable title block, plan view + new section/elevation drawing
+  (`components/ElevationDiagram.tsx`), framing/footing/stair schedules, material list and a
+  code-citation appendix, all print-optimised to Letter.
+- Verified, non-bypassable access: `app/api/checkout` carries the sized deck in Stripe metadata and
+  redirects to `app/api/pro/activate`, which retrieves the session, confirms it was **paid**, then
+  grants lifetime access via a signed httpOnly cookie (`lib/pro.ts`). `app/plan` renders the Studio
+  for cookie-holders (dev-only `?preview=1` bypass for testing) and a clear locked gate otherwise.
+- Fixed all "stamped framing" copy → "code-referenced"; `/pricing` now describes the real packet and
+  handles `?checkout=cancelled/error`.
+- `components/CheckoutButton.tsx` takes an optional deck; the calculator has a "Create permit-ready
+  PDF · $29" CTA that carries the current deck into checkout.
+- New `test/pro.test.mts` (17 cases) covers token signing + deck↔metadata serialisation. Full suite:
+  148 tests + 14,589 fuzz cases, `npm run build` and `npm run lint` clean.
+
 ## 2026-07-09: Live checkout enabled in Production
 
 - **Stripe is now live**: created a live-mode Product (`prod_UqyRDqLbBhGbtx`) and Price

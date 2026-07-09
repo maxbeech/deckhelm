@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadForm from "@/components/LeadForm";
 import ObfuscatedEmail from "@/components/ObfuscatedEmail";
+import { Section, PhotoPlate, Eyebrow } from "@/components/ui";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 604800; // 1 week: static reference content
@@ -51,44 +52,74 @@ export default function FindABuilder() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Find a Deck Builder" }]} />
-      <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Find a deck builder</h1>
-      <p className="mt-2 max-w-2xl text-ink-soft">
-        Worked out your numbers and decided you'd rather not build it yourself? Tell us about your project and
-        we'll pass your details on to deck contractors who serve your area. We're building this network out:
-        early requests go straight to our team, who'll connect you with a contractor directly.
-      </p>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-2">
-        <LeadForm />
-        <div className="space-y-4">
-          <div className="border border-line bg-card p-5 text-sm text-ink-soft">
-            <h2 className="font-display text-base font-semibold text-ink">How it works</h2>
-            <ol className="mt-2 list-decimal space-y-1.5 pl-5">
-              <li>Tell us your project type, ZIP code and rough budget.</li>
-              <li>We pass your details to a deck contractor serving your area.</li>
-              <li>They contact you directly to scope the job and quote it: no obligation to hire.</li>
-            </ol>
-          </div>
-          <div className="border border-line bg-card p-5 text-sm text-ink-soft">
-            <h2 className="font-display text-base font-semibold text-ink">Run a deck-building business?</h2>
-            <p className="mt-2">
-              We send qualified homeowner leads from this calculator to contractors. Email{" "}
-              <ObfuscatedEmail className="font-medium text-ink underline" /> to join the network.
+      <Section tone="paper" className="pt-8 pb-12 sm:pt-10 sm:pb-14">
+        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Find a Deck Builder" }]} />
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+          <div>
+            <Eyebrow>Free · no obligation</Eyebrow>
+            <h1 className="mt-2 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Find a deck builder near you
+            </h1>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
+              Worked out your numbers and decided you&apos;d rather not build it yourself? Tell us about your
+              project and we&apos;ll pass your details to deck contractors who serve your area. We&apos;re building
+              this network out — early requests go straight to our team, who&apos;ll connect you with a contractor
+              directly.
             </p>
           </div>
+          <PhotoPlate
+            src="/photos/deck-lakeside.webp"
+            alt="A spacious lakeside timber deck with lounge furniture in afternoon sun"
+            className="aspect-[4/3] w-full"
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            priority
+          />
         </div>
-      </div>
+      </Section>
 
-      <section className="mt-10 space-y-6 border border-line bg-card p-6">
-        <h2 className="font-display text-lg font-semibold text-ink">Hiring a deck builder: what to know</h2>
-        {faq.map((f) => (
-          <div key={f.q}>
-            <h3 className="font-semibold text-ink">{f.q}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-ink-soft">{f.a}</p>
+      <Section tone="dim" className="py-12 sm:py-16">
+        <div className="grid gap-6 md:grid-cols-[1.3fr_1fr]">
+          <LeadForm />
+          <div className="space-y-4">
+            <div className="border border-line bg-card p-6 text-sm text-ink-soft plate">
+              <h2 className="font-display text-base font-semibold text-ink">How it works</h2>
+              <ol className="mt-3 space-y-3">
+                {[
+                  "Tell us your project type, ZIP code and rough budget.",
+                  "We pass your details to a deck contractor serving your area.",
+                  "They contact you directly to scope the job and quote it — no obligation to hire.",
+                ].map((step, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="font-mono text-xs font-semibold text-rust">{String(i + 1).padStart(2, "0")}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="border border-rust-line bg-rust-tint p-6 text-sm text-ink-soft">
+              <h2 className="font-display text-base font-semibold text-ink">Run a deck-building business?</h2>
+              <p className="mt-2">
+                We send qualified homeowner leads from this calculator to contractors. Email{" "}
+                <ObfuscatedEmail className="font-medium text-ink underline" /> to join the network.
+              </p>
+            </div>
           </div>
-        ))}
-      </section>
+        </div>
+      </Section>
+
+      <Section tone="paper" className="py-14 sm:py-16">
+        <Eyebrow>Hiring a deck builder</Eyebrow>
+        <h2 className="mt-2 font-display text-2xl font-semibold text-ink sm:text-3xl">What to know before you hire</h2>
+        <dl className="mt-6 max-w-3xl divide-y divide-line border-t border-line">
+          {faq.map((f) => (
+            <div key={f.q} className="py-4">
+              <dt className="font-medium text-ink">{f.q}</dt>
+              <dd className="mt-1.5 text-sm leading-relaxed text-ink-soft">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </Section>
     </>
   );
 }

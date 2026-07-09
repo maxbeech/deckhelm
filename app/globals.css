@@ -17,19 +17,28 @@
   --color-line-strong: #c2b092;
   --color-rust: #b5410c;
   --color-rust-dark: #8f3208;
+  --color-rust-bright: #e0651f; /* accent legible on dark ink backgrounds */
   --color-rust-tint: #f9e6d8;
   --color-rust-line: #e3b78e;
   --color-teal: #223d3a;
   --color-teal-tint: #e6efec;
   --color-teal-line: #b9d0c9;
+  --color-ink-deep: #191309; /* rich warm near-black for full-bleed dark bands */
+
+  --shadow-plate: 0 1px 2px rgba(33, 27, 20, 0.04), 0 8px 24px -12px rgba(33, 27, 20, 0.18);
+  --shadow-plate-lg: 0 2px 4px rgba(33, 27, 20, 0.05), 0 24px 48px -20px rgba(33, 27, 20, 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-sans);
   background-color: var(--color-paper);
   background-image:
-    linear-gradient(rgba(33, 27, 20, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(33, 27, 20, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(33, 27, 20, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33, 27, 20, 0.045) 1px, transparent 1px);
   background-size: 32px 32px;
   background-position: -1px -1px;
   background-attachment: local;
@@ -38,4 +47,46 @@ body {
 ::selection {
   background: var(--color-rust);
   color: var(--color-card);
+}
+
+/* A "plate": the spec-plate card, lifted off the blueprint grid with a soft
+   shadow so the page reads as layered depth rather than one flat sheet. */
+.plate {
+  box-shadow: var(--shadow-plate);
+}
+.plate-lg {
+  box-shadow: var(--shadow-plate-lg);
+}
+
+/* Photo treatment: a framed plate with a hairline inset, consistent with the
+   technical/blueprint identity (sharp corners, thin frame, real depth). */
+.photo-plate {
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-plate-lg);
+  outline: 1px solid var(--color-line);
+  outline-offset: -1px;
+}
+
+/* Dark bands: a subtle blueprint grid over the deep-ink background so the
+   texture carries through the section changes instead of going flat. */
+.grid-dark {
+  background-image:
+    linear-gradient(rgba(250, 246, 238, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 246, 238, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@media (min-width: 768px) {
+  .col-rule > * + * {
+    border-left: 1px solid var(--color-line);
+  }
+}
+
+@media print {
+  @page { margin: 0.5in; }
+  body { background: #fff; }
+  body > header, body > footer { display: none !important; }
+  .plate, .plate-lg, .photo-plate { box-shadow: none; }
+  main { margin: 0; }
 }

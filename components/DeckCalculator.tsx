@@ -7,6 +7,7 @@ import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type Joist
 import { US_STATES } from "@/lib/frost";
 import FramingDiagram from "./FramingDiagram";
 import CostBreakdown from "./CostBreakdown";
+import CheckoutButton from "./CheckoutButton";
 import type { Focus } from "@/lib/calculators";
 
 const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
@@ -61,7 +62,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
 
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <div className="space-y-4 rounded-sm border border-line bg-card p-5 print:hidden">
+      <div className="space-y-4 self-start rounded-sm border border-line bg-card p-5 md:sticky md:top-20 print:hidden">
         <div className="grid grid-cols-2 gap-4">
           <Field label="Deck width (ft)" hint="Along the house">
             <input type="number" min={2} max={60} className={ctl} value={inp.width || ""} onFocus={sel}
@@ -174,6 +175,19 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
         </div>
 
         <CostBreakdown cost={cost} decking={decking} onDecking={setDecking} />
+
+        {/* Pro upsell: turn this exact deck into a permit-ready packet. */}
+        <div className="flex flex-col gap-3 border border-rust-line bg-rust-tint p-5 sm:flex-row sm:items-center sm:justify-between print:hidden">
+          <div>
+            <div className="text-sm font-semibold text-ink">Need it for a permit?</div>
+            <p className="mt-0.5 text-xs text-ink-soft">
+              Turn this deck into a permit-ready PDF: title block, elevation, framing &amp; footing schedules, code citations.
+            </p>
+          </div>
+          <div className="shrink-0 sm:w-56">
+            <CheckoutButton deck={{ ...inp, width: sw, projection: sp }} label="Create permit-ready PDF · $29" />
+          </div>
+        </div>
 
         {r.warnings.length > 0 && (
           <div className="rounded-sm border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800">

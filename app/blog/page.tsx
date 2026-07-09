@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Section, PageHeader } from "@/components/ui";
+import { IconArrow } from "@/components/icons";
 import { POSTS } from "@/lib/posts";
 import { SITE } from "@/lib/site";
 
@@ -11,21 +13,25 @@ export const metadata: Metadata = {
 
 export default function BlogIndex() {
   return (
-    <>
-      <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Deck building guides</h1>
-      <p className="mt-2 max-w-2xl text-ink-soft">
-        Clear, code-grounded answers to the questions that come up when you plan and build a deck.
-      </p>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+    <Section tone="paper" className="py-12 sm:py-16">
+      <PageHeader
+        eyebrow="Deck building guides"
+        title="Code-grounded, plain-English answers"
+        intro="The questions that come up when you plan and build a deck — answered against the actual IRC, with the calculator one click away."
+      />
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {POSTS.map((p) => (
           <Link key={p.slug} href={`/blog/${p.slug}`}
-            className="border border-line bg-card p-5 transition hover:border-rust-line">
-            <div className="font-semibold text-ink">{p.title}</div>
-            <div className="mt-1 text-sm text-ink-soft">{p.description}</div>
-            <div className="mt-2 text-xs text-ink-soft">{p.readMins} min read</div>
+            className="group flex flex-col border border-line bg-card p-6 transition hover:-translate-y-0.5 hover:border-rust hover:shadow-[var(--shadow-plate)]">
+            <div className="font-mono text-xs text-ink-faint">{p.readMins} min read</div>
+            <div className="mt-2 font-display text-lg font-semibold leading-snug text-ink group-hover:text-rust">{p.title}</div>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{p.description}</p>
+            <span className="mt-4 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide text-rust">
+              Read <IconArrow className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </span>
           </Link>
         ))}
       </div>
-    </>
+    </Section>
   );
 }

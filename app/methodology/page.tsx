@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Container, Eyebrow } from "@/components/ui";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 604800; // 1 week
@@ -25,9 +26,11 @@ const sources = [
 
 export default function Methodology() {
   return (
-    <article className="mx-auto max-w-2xl">
-      <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Methodology & code sources</h1>
-      <p className="mt-3 leading-relaxed text-ink">
+    <Container size="3xl" className="py-10 sm:py-14">
+      <article className="mx-auto max-w-2xl">
+      <Eyebrow>Transparency</Eyebrow>
+      <h1 className="mt-2 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">Methodology &amp; code sources</h1>
+      <p className="mt-4 text-lg leading-relaxed text-ink">
         Every number on {SITE.name} comes from the published building code, not an estimate or a model we
         invented. The free calculator is a faithful, transparent reader of the IRC R507 prescriptive deck
         provisions, so a result here is exactly what a plans examiner checks against.
@@ -66,6 +69,7 @@ export default function Methodology() {
           Open the deck calculator →
         </Link>
       </div>
-    </article>
+      </article>
+    </Container>
   );
 }

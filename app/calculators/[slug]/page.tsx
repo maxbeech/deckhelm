@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import DeckCalculator from "@/components/DeckCalculator";
 import RailingCalculator from "@/components/RailingCalculator";
 import { BeamSpanTable, JoistSpanTable } from "@/components/SpanTable";
+import { Container, Eyebrow } from "@/components/ui";
 import { CALCS, getCalc } from "@/lib/calculators";
 import { SITE } from "@/lib/site";
 
@@ -41,12 +42,13 @@ export default async function CalcPage({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <>
+    <Container className="py-10 sm:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Calculators", href: "/calculators" }, { name: c.name }]} />
-      <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{c.h1}</h1>
-      <p className="mt-2 max-w-2xl text-ink-soft">{c.intro}</p>
-      <div className="mt-6">{c.focus === "railing" ? <RailingCalculator /> : <DeckCalculator focus={c.focus} />}</div>
+      <Eyebrow>{c.keyword} · {c.volume} searches</Eyebrow>
+      <h1 className="mt-2 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">{c.h1}</h1>
+      <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">{c.intro}</p>
+      <div className="mt-8">{c.focus === "railing" ? <RailingCalculator /> : <DeckCalculator focus={c.focus} />}</div>
 
       {c.focus === "joist" && (
         <section className="mt-10 space-y-6 border border-line bg-card p-6">
@@ -77,7 +79,7 @@ export default async function CalcPage({ params }: { params: Promise<{ slug: str
         <h2 className="font-display text-lg font-semibold text-ink">Want a permit-ready deck plan?</h2>
         <p className="mt-2 text-sm text-ink-soft">
           This estimate is built for planning. For your permit packet, DeckHelm Pro turns these numbers into a
-          stamped framing plan, footing schedule and material list as a printable PDF.
+          code-referenced framing plan, footing schedule and material list as a printable PDF.
         </p>
         <Link href="/pricing" className="mt-3 inline-block bg-ink px-4 py-2 text-sm font-medium text-white hover:opacity-90">
           See Pro →
@@ -95,6 +97,6 @@ export default async function CalcPage({ params }: { params: Promise<{ slug: str
           ))}
         </div>
       </section>
-    </>
+    </Container>
   );
 }

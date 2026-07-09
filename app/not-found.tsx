@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { Container } from "@/components/ui";
 import { CALCS } from "@/lib/calculators";
 
 export default function NotFound() {
   return (
-    <div className="py-12 text-center">
+    <Container className="py-20 text-center">
       <h1 className="font-display text-3xl font-semibold text-ink">Page not found</h1>
       <p className="mx-auto mt-2 max-w-md text-ink-soft">
         That page doesn't exist. Try one of our deck calculators instead:
@@ -19,6 +20,6 @@ export default function NotFound() {
           Home
         </Link>
       </div>
-    </div>
+    </Container>
   );
 }

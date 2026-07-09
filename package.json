@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts",
+    "test": "tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts && tsx test/pro.test.mts",
     "test:e2e": "tsx test/e2e-crawl.mts"
   },
   "dependencies": {

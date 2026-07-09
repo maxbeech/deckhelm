@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DeckCalculator from "@/components/DeckCalculator";
+import { Container, Eyebrow } from "@/components/ui";
 import { getState, US_STATES } from "@/lib/frost";
 import { SITE } from "@/lib/site";
 
@@ -29,13 +30,14 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
   if (!s) notFound();
 
   return (
-    <>
+    <Container className="py-10 sm:py-12">
       <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "By state", href: "/states" }, { name: s.name }]} />
-      <h1 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{s.name} deck code and footing depth</h1>
-      <p className="mt-2 max-w-2xl text-ink-soft">
-        In {s.name}, deck footings must bear at least <strong className="text-ink">{s.frost}" below grade</strong> to sit below the frost line and resist heave. The calculator below is preset to that depth: size your joists, beam, posts and stairs to the IRC R507 deck code, then adjust for your build.
+      <Eyebrow>Frost depth {s.frost}&Prime; · IRC R507</Eyebrow>
+      <h1 className="mt-2 max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">{s.name} deck code and footing depth</h1>
+      <p className="mt-3 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        In {s.name}, deck footings must bear at least <strong className="text-ink">{s.frost}&Prime; below grade</strong> to sit below the frost line and resist heave. The calculator below is preset to that depth: size your joists, beam, posts and stairs to the IRC R507 deck code, then adjust for your build.
       </p>
-      <div className="mt-6"><DeckCalculator initialState={s.slug} /></div>
+      <div className="mt-8"><DeckCalculator initialState={s.slug} /></div>
 
       <section className="mt-10 border border-line bg-card p-6 text-sm leading-relaxed text-ink-soft">
         <h2 className="font-display text-lg font-semibold text-ink">Building a deck in {s.name}</h2>
@@ -64,6 +66,6 @@ export default async function StatePage({ params }: { params: Promise<{ slug: st
           ))}
         </div>
       </section>
-    </>
+    </Container>
   );
 }

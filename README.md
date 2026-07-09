@@ -36,8 +36,12 @@ Live: https://deckhelm.com
 - **Contractor lead-gen** (`/find-a-deck-builder`): a homeowner lead form posts to `/api/lead`,
   env-gated on `RESEND_API_KEY` + `LEAD_NOTIFY_EMAIL` (optionally `LEAD_FROM_EMAIL`), degrades to
   a clear 503 + fallback email address when unset, never a silent drop.
-- **Pro** ($29 one-time) permit-ready deck plan PDF: Stripe checkout, env-gated
-  (`STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`), degrades gracefully when unset.
+- **Pro** ($29 one-time) permit-ready deck plan: Stripe checkout, env-gated
+  (`STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`), degrades gracefully when unset. Payment unlocks the
+  **Plan Studio** (`/plan`) — a print-ready permit submittal packet (title block, plan + elevation
+  drawings, framing/footing/stair schedules, material list, code-citation appendix) generated from
+  the buyer's exact deck. Access is granted only after the Stripe session is verified **paid**
+  server-side (`app/api/pro/activate` → signed httpOnly cookie, `lib/pro.ts`), then held for life.
 
 None of the above third-party keys are set in this Vercel project yet; see "Go live" below.
 
@@ -53,6 +57,8 @@ Set in Vercel → Project → Settings → Environment Variables:
 | `LEAD_NOTIFY_EMAIL` | Lead-gen email | Inbox that receives new homeowner leads |
 | `LEAD_FROM_EMAIL` | Lead-gen email | Optional; defaults to Resend's sandbox sender until `deckhelm.com` is verified in Resend |
 | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID` | Pro checkout | From a Stripe account |
+| `NEXT_PUBLIC_SITE_URL` | Checkout redirects | Optional; the canonical origin for Stripe success/cancel URLs (defaults to the request origin) |
+| `PRO_COOKIE_SECRET` | Pro access cookie | Optional; HMAC key for the lifetime-access cookie (falls back to `STRIPE_SECRET_KEY`) |
 
 ## Design
 
@@ -60,7 +66,13 @@ A "builder's spec-plate" visual system, not a default Tailwind template: warm pa
 with a burnt-orange accent (replaces the generic stone/amber defaults), a serif display face
 (Fraunces) for headings paired with a technical monospace (IBM Plex Mono) for measurements and
 data, sharp-edged cards instead of rounded-everything, and a faint blueprint grid on the page
-background. Tokens live in `app/globals.css`.
+background. Tokens and depth utilities live in `app/globals.css`.
+
+Pages are composed from a small set of shared primitives (`components/ui.tsx`, single source of
+truth): full-bleed tonal `Section` bands (paper / dim / deep-ink / rust-tint) give the site its
+vertical rhythm, `PhotoPlate` frames self-hosted deck photography (`public/photos/`, optimised to
+WebP; AVIF/WebP + 1-year cache in `next.config.ts`), and `Container`/`PageHeader`/`ButtonLink`/
+`Eyebrow` keep every page consistent. A logo mark and a real mobile menu round out the shell.
 
 ## Stack
 
