@@ -20,7 +20,7 @@ export async function GET(req: Request) {
 
   const res = NextResponse.redirect(planUrl);
   const oneYear = 60 * 60 * 24 * 365;
-  res.cookies.set(PRO_COOKIE, proToken(), {
+  res.cookies.set(PRO_COOKIE, proToken(sessionId), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

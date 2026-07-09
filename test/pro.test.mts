@@ -10,15 +10,18 @@ function check(name: string, cond: boolean, detail = "") {
   else { fail++; console.error(`  FAIL ${name} ${detail}`); }
 }
 
-// --- access token ---
-const tok = proToken();
-check("proToken is a non-empty hex string", /^[0-9a-f]{64}$/.test(tok), tok);
-check("proToken is deterministic", proToken() === tok);
+// --- access token (bound to the paid Stripe session, not a shared constant) ---
+const sid = "cs_test_a1b2c3";
+const tok = proToken(sid);
+check("proToken embeds the session id", tok.includes(sid));
+check("proToken is deterministic per session", proToken(sid) === tok);
+check("different sessions get different tokens", proToken("cs_test_other") !== tok);
 check("valid token verifies", isValidProToken(tok));
 check("empty token rejected", !isValidProToken(""));
 check("undefined token rejected", !isValidProToken(undefined));
-check("wrong-length token rejected", !isValidProToken(tok + "aa"));
-check("tampered token rejected", !isValidProToken("0".repeat(64)));
+check("tampered signature rejected", !isValidProToken(tok.slice(0, -4) + "0000"));
+check("forged payload rejected", !isValidProToken("v2:cs_test_forged:" + "0".repeat(64)));
+check("old constant-token format rejected", !isValidProToken("0".repeat(64)));
 
 // --- deck ↔ metadata ---
 const deck: DeckInputs = { ...DEFAULT_DECK, width: 20, projection: 14, state: "texas", species: "sp", joist: "auto" };

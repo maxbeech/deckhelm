@@ -13,18 +13,33 @@ function secret(): string {
   return process.env.PRO_COOKIE_SECRET || process.env.STRIPE_SECRET_KEY || "deckhelm-dev-secret";
 }
 
-// A stable access token: HMAC over a version constant. No expiry — Pro is a
-// one-time purchase with lifetime access, as advertised on /pricing.
-export function proToken(): string {
-  return createHmac("sha256", secret()).update("deckhelm-pro-v1").digest("hex");
+const TOKEN_VERSION = "v2";
+
+function sign(payload: string): string {
+  return createHmac("sha256", secret()).update(payload).digest("hex");
+}
+
+// Access token bound to the buyer's specific paid Stripe session, so it is NOT
+// a single shared credential (every buyer gets a distinct, verifiable token
+// tied to their purchase). No expiry — Pro is lifetime, as advertised. The
+// signature is over `version:sessionId`, so the payload can't be forged without
+// the server secret.
+export function proToken(sessionId: string): string {
+  const payload = `${TOKEN_VERSION}:${sessionId}`;
+  return `${payload}:${sign(payload)}`;
 }
 
 export function isValidProToken(token?: string | null): boolean {
   if (!token) return false;
-  const expected = proToken();
-  if (token.length !== expected.length) return false;
+  const cut = token.lastIndexOf(":");
+  if (cut <= 0) return false;
+  const payload = token.slice(0, cut);
+  const sig = token.slice(cut + 1);
+  if (!payload.startsWith(`${TOKEN_VERSION}:`) || payload.length <= TOKEN_VERSION.length + 1) return false;
+  const expected = sign(payload);
+  if (sig.length !== expected.length) return false;
   try {
-    return timingSafeEqual(Buffer.from(token), Buffer.from(expected));
+    return timingSafeEqual(Buffer.from(sig), Buffer.from(expected));
   } catch {
     return false;
   }
