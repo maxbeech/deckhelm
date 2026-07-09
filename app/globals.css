@@ -12,7 +12,7 @@
   --color-card: #fffcf5;
   --color-ink: #211b14;
   --color-ink-soft: #6b6053;
-  --color-ink-faint: #948a7c;
+  --color-ink-faint: #6f6455; /* WCAG AA (≥4.5:1) on paper-dim/card/white at small sizes */
   --color-line: #ddd0b8;
   --color-line-strong: #c2b092;
   --color-rust: #b5410c;

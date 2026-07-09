@@ -48,7 +48,7 @@ const BTN: Record<string, string> = {
   primary:
     "bg-rust text-white hover:bg-rust-dark shadow-[0_10px_24px_-12px_rgba(181,65,12,0.7)]",
   onDark:
-    "bg-rust-bright text-white hover:bg-rust",
+    "bg-rust text-white hover:bg-rust-dark",
   secondary:
     "border border-ink text-ink hover:bg-ink hover:text-paper",
   secondaryOnDark:

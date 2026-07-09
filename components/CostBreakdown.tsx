@@ -38,7 +38,7 @@ export default function CostBreakdown({
                       <>
                         {" · "}
                         <a href={amazonSearchUrl(query)} target="_blank" rel="noopener noreferrer sponsored"
-                          className="text-rust hover:text-rust-dark hover:underline">
+                          className="text-rust underline hover:text-rust-dark">
                           Shop materials ↗
                         </a>
                       </>

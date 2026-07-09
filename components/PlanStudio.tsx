@@ -121,11 +121,11 @@ export default function PlanStudio({ initialDeck }: { initialDeck: DeckInputs })
             </div>
             <div className="text-right">
               <div className="font-display text-lg font-semibold text-ink">Deck<span className="text-rust">Helm</span></div>
-              <dl className="mt-1 space-y-0.5 font-mono text-[11px] text-ink-soft">
+              <div className="mt-1 space-y-0.5 font-mono text-[11px] text-ink-soft">
                 <div>Date: {today}</div>
                 <div>Prepared for: {meta.preparedFor || "—"}</div>
                 <div>Permit #: {meta.permit || "—"}</div>
-              </dl>
+              </div>
             </div>
           </div>
 
