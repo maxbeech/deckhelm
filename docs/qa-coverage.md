@@ -4,6 +4,16 @@ Last verified: **2026-07-09**. Living document — update when flows or coverage
 
 Legend: ✅ automated + verified · 🧪 unit/integration test · 👤 human/agent E2E (browser) · ⚠️ manual step required
 
+**Comprehensive browser E2E (2026-07-09):** a self-contained Playwright harness exercised 23 checks
+across all flows on a live server — homepage (desktop+mobile, hero image, no NaN), calculator edge
+cases (60×40 no-prescriptive, projection>18 engineered warning, empty width, height 0), **both Pro
+payments completed with a Stripe test card** (path A /pricing → unlock + lifetime revisit; path B
+calculator 22×8 Minnesota → plan pre-loaded with 60″ frost depth), locked gate, lead form (submit +
+graceful degradation), print media hides site chrome, mobile-menu navigation, secondary pages —
+**0 console/pageerrors**. Two initially-red checks were confirmed to be test-harness artifacts
+(a too-short wait during a Resend throttle; a selector miss), with the underlying flows re-verified
+working. An independent Sonnet browser agent also passed the read-only flows with zero blockers.
+
 ## Free user journeys
 
 | Flow | How it's covered | Status |
