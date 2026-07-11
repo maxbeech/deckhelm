@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-07-11: Blog expansion — 26 posts, featured images, richer schema
+
+Expanded the blog from 11 short reference posts (~500 words each, text-only) into a 26-post
+content library aligned with `docs/seo_geo_content_plan.md`'s keyword strategy.
+
+- **Schema (`lib/posts.ts`)**: `Post` gained `category` (Academy/News/Reviews), `supportingKeywords`,
+  `image`/`imageAlt`, and `howTo`. `Block` gained `h3`, `ol`, `quote`, `table`, `tldr` and `faq`
+  variants. A new safe inline-link helper (`lib/post-render.tsx`) supports `[text](url)` syntax in
+  body copy without `dangerouslySetInnerHTML` — links are built as real React nodes.
+- **Content**: all 11 existing posts expanded to 1,200–2,500 words (were ~400–650) with a TL;DR,
+  one data table, one attributed quote, and a 4–5 item FAQ each; 15 new posts added covering the
+  plan's GEO-champion, high-intent-closer and semantic-cluster keyword gaps (deck vs patio, DIY vs
+  contractor cost, composite vs wood, joist hangers, railing kits, deck screws, a stair-stringer
+  skyscraper guide, a small-deck-ideas listicle, and two News-category trend pieces grounded in
+  2026 NAHB lumber-price and Houzz outdoor-trends data). Numeric claims outside established IRC
+  figures are cited to Angi, NerdWallet, Zonda's 2025 Cost vs. Value Report, NAHB, CPSC, Houzz or
+  ICC; no fabricated statistics, no invented named experts — quotes are attributed to DeckHelm's
+  own review team, consistent with the "no fabricated testimonials" rule from the redesign.
+- **Featured images**: 26 photos sourced from Pexels via the Pipedream MCP integration, converted
+  to WebP and self-hosted under `public/photos/blog/`, one per post.
+- **Rendering**: `app/blog/[slug]/page.tsx` renders all new block types, an auto-generated table of
+  contents from `h2` headings, a featured-image `PhotoPlate`, and emits `BlogPosting` JSON-LD plus
+  conditional `FAQPage`/`HowTo` JSON-LD. `app/blog/page.tsx` cards show a thumbnail and category tag.
+- Sitemap and `generateStaticParams` pick up all 26 posts automatically (no manual step needed).
+
 ## 2026-07-09: Premium redesign + real Pro fulfilment
 
 A full product-quality overhaul: the site now reads like a seed-funded startup, and the Pro

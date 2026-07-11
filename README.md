@@ -25,7 +25,9 @@ Live: https://deckhelm.com
 
 - Per-calculator pages: deck joist span, deck beam span, deck footing, deck stair, deck cost.
 - Per-state deck-code pages (50 states) with local frost depth + permit guidance.
-- Deck building guides (blog), sitemap, robots, JSON-LD.
+- Deck building guides (blog): 26 long-form posts (`lib/posts.ts`) across Academy/News/Reviews
+  categories, each with a featured photo, TL;DR, one data table, one FAQ block (feeds `FAQPage`
+  JSON-LD), and `BlogPosting`/`HowTo` JSON-LD, auto-generated table of contents, sitemap, robots.
 
 ## Monetisation
 
