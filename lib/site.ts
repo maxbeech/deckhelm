@@ -1,7 +1,9 @@
 export const SITE = {
   name: "DeckHelm",
-  domain: "deckhelm.com",
-  url: "https://deckhelm.com",
+  // Vercel serves the apex as a permanent redirect. Keeping the origin here is
+  // the single canonical-host source for metadata, schema, robots and sitemaps.
+  domain: "www.deckhelm.com",
+  url: "https://www.deckhelm.com",
   email: "hello@deckhelm.com",
   tagline: "Free deck building code calculator",
   description:

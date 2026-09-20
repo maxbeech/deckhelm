@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-09-20: Search indexing and canonical-host remediation
+
+- Made `https://www.deckhelm.com` the single source for canonical URLs, structured data, `robots.txt` and `sitemap.xml`. The apex remains a permanent Vercel redirect to that host.
+- Removed the misleading generated sitemap `lastmod` timestamp and now emit only truthful publication dates for guides, alongside sensible change frequencies for static pages.
+- Added a permanent redirect from the reported missing ledger-flashing URL to the published ledger-attachment guide.
+- Removed thin, unsupported state preset pages from the sitemap and marked them `noindex,follow`. They remain available to people using the calculator; they will return to the sitemap only with independently sourced jurisdiction-level content.
+- Kept incomplete legacy guide drafts out of the published post collection, so publication, sitemap and static route generation use one editorial source of truth.
+
 ## 2026-07-11: Blog expansion — 26 posts, featured images, richer schema
 
 Expanded the blog from 11 short reference posts (~500 words each, text-only) into a 26-post

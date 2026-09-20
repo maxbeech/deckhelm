@@ -41,8 +41,8 @@ const textOf = (html: string) =>
 // These check the exact phrasing renders with the space intact, against
 // textOf() (tags stripped) output, on one page of each affected shape.
 const exactPhraseChecks: Record<string, string[]> = {
-  "/": ["deck code in seconds"],
-  "/states/alabama": ["Alabama deck code and footing depth", "least 12 &quot; below grade to sit"],
+  "/": ["Free, in seconds"],
+  "/states/alabama": ["Alabama deck code and footing depth", "least 12 ″ below grade to sit"],
 };
 
 let pass = 0, fail = 0;

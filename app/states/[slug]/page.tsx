@@ -21,6 +21,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${s.name} Deck Code, Permits & Footing Depth`,
     description: `Deck permit rules and the ${s.frost}" footing depth required below ${s.name}'s frost line, plus a free IRC R507 deck framing calculator preset to ${s.name}.`,
     alternates: { canonical: `${SITE.url}/states/${s.slug}` },
+    // The shared data is a typical frost-depth preset, not a jurisdiction-by-
+    // jurisdiction code guide. Keep it available to builders without making
+    // unsupported state-wide ranking claims to search engines.
+    robots: { index: false, follow: true },
   };
 }
 

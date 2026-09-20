@@ -1798,7 +1798,9 @@ export function getPost(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug);
 }
 
-const WEEK2_POSTS: Post[] = [
+// Archived editorial drafts. They lack the required source metadata and are
+// intentionally not published until each can meet the same standard as POSTS.
+export const LEGACY_DRAFT_POSTS: Array<Omit<Post, "category" | "supportingKeywords" | "image" | "imageAlt">> = [
   {
     slug: "deck-board-spacing-guide",
     title: "Deck Board Spacing: What Gap Should You Leave?",
@@ -2082,5 +2084,3 @@ const WEEK2_POSTS: Post[] = [
     ],
   },
 ];
-
-POSTS.push(...WEEK2_POSTS);

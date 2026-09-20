@@ -4,7 +4,7 @@ Free deck building code calculator: sizes deck **joists, beams, posts, footings 
 to the real **IRC R507 / AWC DCA6** prescriptive deck code, with each US state's frost depth and a
 permit-ready breakdown.
 
-Live: https://deckhelm.com
+Live: https://www.deckhelm.com
 
 ## What it does
 
@@ -24,7 +24,7 @@ Live: https://deckhelm.com
 ## SEO surface
 
 - Per-calculator pages: deck joist span, deck beam span, deck footing, deck stair, deck cost.
-- Per-state deck-code pages (50 states) with local frost depth + permit guidance.
+- State frost-depth calculator presets (50 states), kept available for builders but excluded from search until each can be supported by jurisdiction-level primary sources.
 - Deck building guides (blog): 26 long-form posts (`lib/posts.ts`) across Academy/News/Reviews
   categories, each with a featured photo, TL;DR, one data table, one FAQ block (feeds `FAQPage`
   JSON-LD), and `BlogPosting`/`HowTo` JSON-LD, auto-generated table of contents, sitemap, robots.
