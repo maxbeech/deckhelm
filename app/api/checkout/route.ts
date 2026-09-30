@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import { SITE } from "@/lib/site";
 import { deckToMetadata } from "@/lib/pro";
 
@@ -61,10 +62,12 @@ export async function POST(req: Request) {
     });
     const session = await res.json();
     if (!res.ok) {
+      Sentry.captureMessage(`Stripe checkout session create failed: ${session?.error?.message ?? "unknown"}`, "error");
       return NextResponse.json({ error: session?.error?.message ?? "Stripe error" }, { status: 502 });
     }
     return NextResponse.json({ url: session.url });
-  } catch {
+  } catch (err) {
+    Sentry.captureException(err);
     return NextResponse.json({ error: "Could not reach Stripe." }, { status: 502 });
   }
 }

@@ -804,7 +804,7 @@ export const POSTS: Post[] = [
     "composite deck vs paver patio",
     "deck vs patio drainage"
   ],
-  date: "2026-07-05",
+  date: "2026-09-24",
   readMins: 8,
   related: "deck-cost-calculator",
   howTo: false,
@@ -869,7 +869,7 @@ export const POSTS: Post[] = [
     "cheapest decking material",
     "long term cost of a wood deck"
   ],
-  date: "2026-07-05",
+  date: "2026-09-24",
   readMins: 7,
   related: "deck-material-calculator",
   howTo: false,
@@ -931,7 +931,7 @@ export const POSTS: Post[] = [
     "deck load capacity per square foot",
     "is my deck strong enough for a hot tub"
   ],
-  date: "2026-07-06",
+  date: "2026-09-25",
   readMins: 7,
   related: "deck-joist-span-calculator",
   howTo: false,
@@ -988,7 +988,7 @@ export const POSTS: Post[] = [
     "deck building labor cost savings",
     "should I hire a contractor to build a deck"
   ],
-  date: "2026-07-06",
+  date: "2026-09-25",
   readMins: 7,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1058,7 +1058,7 @@ export const POSTS: Post[] = [
     "trex decking cost per square foot",
     "cedar deck cost per square foot"
   ],
-  date: "2026-07-07",
+  date: "2026-09-26",
   readMins: 7,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1121,7 +1121,7 @@ export const POSTS: Post[] = [
     "deck building labor cost 2026",
     "how much does deck labor cost"
   ],
-  date: "2026-07-07",
+  date: "2026-09-26",
   readMins: 7,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1187,7 +1187,7 @@ export const POSTS: Post[] = [
     "capped composite decking cost",
     "pvc decking cost"
   ],
-  date: "2026-07-08",
+  date: "2026-09-27",
   readMins: 8,
   related: "deck-material-calculator",
   howTo: false,
@@ -1261,7 +1261,7 @@ export const POSTS: Post[] = [
     "how much does it cost to repair a deck",
     "deck stringer repair"
   ],
-  date: "2026-07-08",
+  date: "2026-09-27",
   readMins: 8,
   related: "deck-footing-calculator",
   howTo: false,
@@ -1328,7 +1328,7 @@ export const POSTS: Post[] = [
     "joist hanger nails vs screws",
     "hidden flange joist hangers"
   ],
-  date: "2026-07-09",
+  date: "2026-09-28",
   readMins: 8,
   related: "deck-material-calculator",
   howTo: false,
@@ -1394,7 +1394,7 @@ export const POSTS: Post[] = [
     "treated wood price increase",
     "lumber tariffs Canada 2026"
   ],
-  date: "2026-07-11",
+  date: "2026-09-30",
   readMins: 7,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1461,7 +1461,7 @@ export const POSTS: Post[] = [
     "wood deck railing kit",
     "deck guard rail height code"
   ],
-  date: "2026-07-09",
+  date: "2026-09-28",
   readMins: 7,
   related: "deck-railing-calculator",
   howTo: false,
@@ -1530,7 +1530,7 @@ export const POSTS: Post[] = [
     "deck screws cedar staining",
     "ACQ lumber corrosion screws"
   ],
-  date: "2026-07-09",
+  date: "2026-09-28",
   readMins: 8,
   related: "deck-material-calculator",
   howTo: false,
@@ -1599,7 +1599,7 @@ export const POSTS: Post[] = [
     "stair stringer layout",
     "deck stair stringer spacing"
   ],
-  date: "2026-07-10",
+  date: "2026-09-29",
   readMins: 11,
   related: "deck-stair-calculator",
   howTo: true,
@@ -1675,7 +1675,7 @@ export const POSTS: Post[] = [
     "built-in deck seating ideas",
     "small deck railing ideas"
   ],
-  date: "2026-07-10",
+  date: "2026-09-29",
   readMins: 8,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1746,7 +1746,7 @@ export const POSTS: Post[] = [
     "Houzz outdoor trends study",
     "deck building trends"
   ],
-  date: "2026-07-11",
+  date: "2026-09-30",
   readMins: 6,
   related: "deck-cost-calculator",
   howTo: false,
@@ -1798,8 +1798,9 @@ export function getPost(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug);
 }
 
-// Archived editorial drafts. They lack the required source metadata and are
-// intentionally not published until each can meet the same standard as POSTS.
+// Archived pre-expansion drafts. They deliberately stay out of `POSTS`: unlike
+// the 26 publication-ready posts above, they do not have the required SEO
+// metadata or featured images and would produce broken cards on `/blog`.
 export const LEGACY_DRAFT_POSTS: Array<Omit<Post, "category" | "supportingKeywords" | "image" | "imageAlt">> = [
   {
     slug: "deck-board-spacing-guide",

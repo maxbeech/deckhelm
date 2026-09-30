@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { affiliateQuery, amazonSearchUrl, AMAZON_TAG } from "@/lib/affiliate";
 import { DECKING_LABEL, type CostResult, type Decking } from "@/lib/cost";
+import { track } from "@/lib/openhelm-analytics";
 
 const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
 
@@ -38,6 +39,7 @@ export default function CostBreakdown({
                       <>
                         {" · "}
                         <a href={amazonSearchUrl(query)} target="_blank" rel="noopener noreferrer sponsored"
+                          onClick={() => track("affiliate_link_clicked", { kind: it.kind, decking })}
                           className="text-rust underline hover:text-rust-dark">
                           Shop materials ↗
                         </a>

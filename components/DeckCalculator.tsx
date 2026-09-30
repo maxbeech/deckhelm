@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { computeDeck, DEFAULT_DECK, type DeckInputs } from "@/lib/deck";
 import { computeCost, DEFAULT_DECKING, type Decking } from "@/lib/cost";
 import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type JoistSize, type Spacing, type Species } from "@/lib/deck-tables";
 import { US_STATES } from "@/lib/frost";
+import { track } from "@/lib/openhelm-analytics";
 import FramingDiagram from "./FramingDiagram";
 import CostBreakdown from "./CostBreakdown";
 import CheckoutButton from "./CheckoutButton";
@@ -49,7 +50,23 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
     width: sw, projection: sp, decking, postCount: r.postCount,
     needsGuard: r.needsGuard, stairTreads: r.stairs?.treads ?? 0, hasStairs: !!r.stairs,
   }), [sw, sp, decking, r.postCount, r.needsGuard, r.stairs]);
-  const set = <K extends keyof DeckInputs>(k: K, v: DeckInputs[K]) => setInp((p) => ({ ...p, [k]: v }));
+  const set = <K extends keyof DeckInputs>(k: K, v: DeckInputs[K]) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      track("calculator_started", { field: k });
+    }
+    setInp((p) => ({ ...p, [k]: v }));
+  };
+  // Fires once per mount: activation is "reached a valid, code-compliant
+  // result", not merely "loaded the page" (which page_view already covers).
+  const startedRef = useRef(false);
+  const resultSeenRef = useRef(false);
+  useEffect(() => {
+    if (resultSeenRef.current) return;
+    if (!r.valid) return;
+    resultSeenRef.current = true;
+    track("calculator_result_viewed", { joist_size: r.joistSize ?? "none", valid: r.valid });
+  }, [r.valid, r.joistSize]);
 
   const headline = (() => {
     if (focus === "footing") return ["Footing", `${r.footingDiameterIn}″ dia. × ${r.footingDepthIn}″ deep`, `${r.footingLoadLb} lb/post · ${r.footingAreaSqft} ft² bearing`];
@@ -96,7 +113,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
             {US_STATES.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
           </select>
         </Field>
-        <button type="button" onClick={() => setAdv((v) => !v)} className="text-xs font-medium text-rust hover:text-rust-dark">
+        <button type="button" onClick={() => setAdv((v) => { const next = !v; if (next) track("advanced_options_opened"); return next; })} className="text-xs font-medium text-rust hover:text-rust-dark">
           {adv ? "− Hide" : "+ Show"} advanced (override sizes, soil)
         </button>
         {adv && (
@@ -154,7 +171,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
         <div className="rounded-sm border border-line bg-card p-5">
           <div className="mb-1 flex items-center justify-between">
             <div className="text-sm font-semibold text-ink">Code-compliant framing plan</div>
-            <button type="button" onClick={() => window.print()} className="text-xs font-medium text-rust hover:text-rust-dark print:hidden">Print / save PDF</button>
+            <button type="button" onClick={() => { track("framing_plan_printed"); window.print(); }} className="text-xs font-medium text-rust hover:text-rust-dark print:hidden">Print / save PDF</button>
           </div>
           <FramingDiagram width={sw} projection={sp} joistCount={r.joistCount}
             postCount={r.postCount} joistSize={r.joistSize} beamSize={r.beamSize} postSpacingIn={r.postSpacingIn} valid={r.valid} />

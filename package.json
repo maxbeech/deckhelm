@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
     "lint": "eslint",
-    "test": "tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts && tsx test/pro.test.mts && tsx test/boundary.test.mts && tsx test/seo.test.mts && tsx test/no-vercel.test.mts",
+    "test": "tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts && tsx test/pro.test.mts && tsx test/boundary.test.mts && tsx test/seo.test.mts && tsx test/no-vercel.test.mts && tsx test/analytics.test.mts && tsx test/blog-content.test.mts",
     "test:e2e": "tsx test/e2e-crawl.mts"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "eslint-plugin-react": "^7.37.5",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5"

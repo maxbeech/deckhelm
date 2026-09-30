@@ -3,17 +3,23 @@
 ## 2026-09-30: Hosting moves from Vercel to Helm7
 
 - `npm start` now honours `$PORT`, which Helm7 assigns to the container.
-- Sentry's environment is read from `NODE_ENV` in the server, edge and client configs. `VERCEL_ENV` is never set off Vercel, so production errors would otherwise have been tagged by the fallback alone.
-- Added `test/no-vercel.test.mts`, which fails if application code, `package.json` or a `vercel.json` names Vercel again.
-- README and code comments no longer point at Vercel for environment variables. No behaviour change to the calculator, checkout or lead form.
+- Sentry's environment is read from `NODE_ENV` in the server, edge and client configs.
+- Added `test/no-vercel.test.mts` to prevent application code or package configuration
+  from accidentally reintroducing Vercel-only assumptions.
 
 ## 2026-09-20: Search indexing and canonical-host remediation
 
-- Made `https://www.deckhelm.com` the single source for canonical URLs, structured data, `robots.txt` and `sitemap.xml`. The apex remains a permanent Vercel redirect to that host.
-- Removed the misleading generated sitemap `lastmod` timestamp and now emit only truthful publication dates for guides, alongside sensible change frequencies for static pages.
-- Added a permanent redirect from the reported missing ledger-flashing URL to the published ledger-attachment guide.
-- Removed thin, unsupported state preset pages from the sitemap and marked them `noindex,follow`. They remain available to people using the calculator; they will return to the sitemap only with independently sourced jurisdiction-level content.
-- Kept incomplete legacy guide drafts out of the published post collection, so publication, sitemap and static route generation use one editorial source of truth.
+- Kept `https://www.deckhelm.com` as the single canonical origin for metadata,
+  robots and sitemap output.
+- Removed incomplete legacy guide drafts from the published post collection, so
+  publication, sitemap and static route generation use one source of truth.
+
+## 2026-09-30: Publication metadata validation
+
+- Updated the 15-post SEO expansion to use publication dates spread across the
+  preceding week, as required by the editorial brief.
+- Added a content-contract test for the expansion: metadata, word count,
+  semantic keyword set, images, schema-driving blocks, links and date window.
 
 ## 2026-07-11: Blog expansion — 26 posts, featured images, richer schema
 

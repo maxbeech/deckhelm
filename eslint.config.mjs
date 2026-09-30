@@ -1,11 +1,13 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import reactPlugin from "eslint-plugin-react";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
+    plugins: { react: reactPlugin },
     rules: {
       // Literal ' and " in JSX text are valid and render correctly; requiring
       // &apos;/&quot; here actually causes a real bug in this Next.js/Turbopack
@@ -20,6 +22,7 @@ const eslintConfig = defineConfig([
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",
+    ".vercel/**",
     "out/**",
     "build/**",
     "next-env.d.ts",

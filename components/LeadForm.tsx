@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import * as Sentry from "@sentry/nextjs";
 import { US_STATES } from "@/lib/frost";
+import { track } from "@/lib/openhelm-analytics";
 
 const PROJECT_TYPES = [
   "New deck construction",
@@ -19,6 +21,14 @@ const ctl = "mt-1 w-full rounded-sm border border-line-strong bg-card px-3 py-2 
 export default function LeadForm() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ ok: boolean; message: string } | null>(null);
+  // Fires once per form: "started" means a real visitor engaged with the
+  // fields, not just landed on the page (page_view already covers that).
+  const startedRef = useRef(false);
+  const onFieldChange = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track("lead_form_started");
+  };
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,12 +44,20 @@ export default function LeadForm() {
       });
       const data = await res.json();
       if (res.ok) {
+        track("lead_form_submitted");
         setResult({ ok: true, message: "Got it. We'll be in touch about contractors in your area." });
         e.currentTarget.reset();
       } else {
+        // A handled failure (validation, 503 unconfigured, upstream error), not
+        // a thrown exception — still worth a low-severity Sentry breadcrumb so a
+        // spike in failed submissions is visible without a user ever reporting it.
+        Sentry.captureMessage(`Lead form submission rejected: ${data.error ?? "unknown"}`, "warning");
+        track("lead_form_submit_failed", { reason: data.error ?? "rejected", status: res.status });
         setResult({ ok: false, message: data.error ?? "Something went wrong. Please try again." });
       }
-    } catch {
+    } catch (err) {
+      Sentry.captureException(err);
+      track("lead_form_submit_failed", { reason: "network_error" });
       setResult({ ok: false, message: "Could not reach the server. Please try again." });
     } finally {
       setSubmitting(false);
@@ -56,7 +74,7 @@ export default function LeadForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-sm border border-line bg-card p-6">
+    <form onSubmit={onSubmit} onChange={onFieldChange} className="space-y-4 rounded-sm border border-line bg-card p-6">
       {/* Honeypot: hidden from real users via CSS, bots fill every field they see in the DOM */}
       <div className="hidden" aria-hidden="true">
         <label>

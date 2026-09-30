@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { computeDeck, type DeckInputs } from "@/lib/deck";
 import { computeCost, DECKING_LABEL, DEFAULT_DECKING, type Decking } from "@/lib/cost";
 import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type JoistSize, type Spacing, type Species } from "@/lib/deck-tables";
 import { US_STATES } from "@/lib/frost";
 import { SITE } from "@/lib/site";
+import { track } from "@/lib/openhelm-analytics";
 import { Container } from "@/components/ui";
 import FramingDiagram from "./FramingDiagram";
 import ElevationDiagram from "./ElevationDiagram";
@@ -58,6 +60,20 @@ export default function PlanStudio({ initialDeck }: { initialDeck: DeckInputs })
   const [decking, setDecking] = useState<Decking>(DEFAULT_DECKING);
   const [meta, setMeta] = useState({ project: "", address: "", preparedFor: "", permit: "" });
   const set = <K extends keyof DeckInputs>(k: K, v: DeckInputs[K]) => setInp((p) => ({ ...p, [k]: v }));
+
+  // Reached only by a verified Pro buyer (app/plan/page.tsx gates on the signed
+  // cookie). `activated=1` is set once, on the redirect straight out of a paid
+  // Stripe session (app/api/pro/activate/route.ts), so pro_purchase_completed
+  // fires exactly on the visit that completed the purchase, while
+  // plan_studio_viewed fires on every visit including later re-engagement.
+  const searchParams = useSearchParams();
+  const trackedRef = useRef(false);
+  useEffect(() => {
+    if (trackedRef.current) return;
+    trackedRef.current = true;
+    track("plan_studio_viewed");
+    if (searchParams.get("activated") === "1") track("pro_purchase_completed");
+  }, [searchParams]);
 
   const r = useMemo(() => computeDeck(inp), [inp]);
   const sw = Math.min(60, Math.max(2, inp.width || 0));

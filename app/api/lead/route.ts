@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import { isHoneypotFilled, leadEmailHtml, parseLead, validateLead } from "@/lib/lead";
 
 // Homeowner → contractor lead capture. Mirrors the checkout route's pattern:
@@ -47,10 +48,12 @@ export async function POST(req: Request) {
     });
     if (!res.ok) {
       const errBody = await res.json().catch(() => null);
+      Sentry.captureMessage(`Lead email send failed: ${errBody?.message ?? "unknown"}`, "error");
       return NextResponse.json({ error: errBody?.message ?? "Could not send your details. Please try again." }, { status: 502 });
     }
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    Sentry.captureException(err);
     return NextResponse.json({ error: "Could not reach the lead service." }, { status: 502 });
   }
 }

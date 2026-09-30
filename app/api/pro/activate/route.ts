@@ -18,6 +18,10 @@ export async function GET(req: Request) {
   const session = await retrieveCheckoutSession(sessionId);
   if (!session || !session.paid) return NextResponse.redirect(failUrl);
 
+  // Mark the redirect as a fresh activation (query param, not a cookie) so the
+  // client-side pro_purchase_completed event fires exactly once, on the visit
+  // that actually just paid, and not on every later /plan revisit.
+  planUrl.searchParams.set("activated", "1");
   const res = NextResponse.redirect(planUrl);
   const oneYear = 60 * 60 * 24 * 365;
   res.cookies.set(PRO_COOKIE, proToken(sessionId), {

@@ -4,6 +4,7 @@
 // re-paying. Deck inputs chosen before checkout ride along in session metadata
 // so the plan can pre-load the exact deck the buyer sized.
 import { createHmac, timingSafeEqual } from "node:crypto";
+import * as Sentry from "@sentry/nextjs";
 import type { DeckInputs } from "./deck";
 
 export const PRO_COOKIE = "dh_pro";
@@ -83,7 +84,11 @@ export async function retrieveCheckoutSession(
     const session = await res.json();
     const paid = session?.payment_status === "paid" || session?.status === "complete";
     return { paid, metadata: session?.metadata ?? {} };
-  } catch {
+  } catch (err) {
+    // Without this capture, a Stripe API outage looks identical to "no
+    // session_id" to the caller: the buyer is bounced to a generic error page
+    // and nobody is told a paying customer got stuck.
+    Sentry.captureException(err);
     return null;
   }
 }

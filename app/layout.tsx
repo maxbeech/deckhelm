@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import MobileNav from "@/components/MobileNav";
+import { OpenHelmAnalytics } from "../lib/openhelm-analytics";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap" });
 const instrumentSans = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument", display: "swap" });
@@ -147,6 +148,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <OpenHelmAnalytics />
       </body>
     </html>
   );
