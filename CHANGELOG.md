@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-30: Hosting moves from Vercel to Helm7
+
+- `npm start` now honours `$PORT`, which Helm7 assigns to the container.
+- Sentry's environment is read from `NODE_ENV` in the server, edge and client configs. `VERCEL_ENV` is never set off Vercel, so production errors would otherwise have been tagged by the fallback alone.
+- Added `test/no-vercel.test.mts`, which fails if application code, `package.json` or a `vercel.json` names Vercel again.
+- README and code comments no longer point at Vercel for environment variables. No behaviour change to the calculator, checkout or lead form.
+
 ## 2026-09-20: Search indexing and canonical-host remediation
 
 - Made `https://www.deckhelm.com` the single source for canonical URLs, structured data, `robots.txt` and `sitemap.xml`. The apex remains a permanent Vercel redirect to that host.

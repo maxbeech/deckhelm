@@ -14,8 +14,8 @@ function originFrom(req: Request): string {
   }
 }
 
-// Stripe Checkout for the Pro permit-ready deck plan. Keys arrive as Vercel env
-// vars (STRIPE_SECRET_KEY, STRIPE_PRICE_ID). When absent, before the Stripe
+// Stripe Checkout for the Pro permit-ready deck plan. Keys arrive as environment
+// variables (STRIPE_SECRET_KEY, STRIPE_PRICE_ID). When absent, before the Stripe
 // account is wired, the route degrades gracefully (503 + early-access note)
 // instead of throwing, so the free calculator is never affected. The optional
 // request body carries the deck the buyer sized, so the Plan Studio can

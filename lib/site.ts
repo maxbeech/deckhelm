@@ -1,6 +1,6 @@
 export const SITE = {
   name: "DeckHelm",
-  // Vercel serves the apex as a permanent redirect. Keeping the origin here is
+  // The hosting ingress redirects the apex to www. Keeping the origin here is
   // the single canonical-host source for metadata, schema, robots and sitemaps.
   domain: "www.deckhelm.com",
   url: "https://www.deckhelm.com",

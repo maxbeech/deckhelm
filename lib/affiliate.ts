@@ -1,7 +1,7 @@
 // Amazon Associates affiliate links. Single source of truth for the product search
 // query behind each cost-breakdown line item. NEXT_PUBLIC_AMAZON_TAG is optional:
 // without it, links still point at a real, working Amazon search (no commission is
-// earned, but nothing is fake or broken). Set the tag in Vercel to start earning.
+// earned, but nothing is fake or broken). Set the tag in the hosting environment to start earning.
 import type { CostKind, Decking } from "./cost";
 
 export const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_TAG ?? "";

@@ -45,12 +45,12 @@ Live: https://www.deckhelm.com
   the buyer's exact deck. Access is granted only after the Stripe session is verified **paid**
   server-side (`app/api/pro/activate` → signed httpOnly cookie, `lib/pro.ts`), then held for life.
 
-None of the above third-party keys are set in this Vercel project yet; see "Go live" below.
+None of the above third-party keys are required to run the site; see "Go live" below.
 
 ## Go live: required environment variables
 
 All optional, all degrade gracefully when unset (free tools and content stay fully functional).
-Set in Vercel → Project → Settings → Environment Variables:
+Set as variables on the Helm7 product (production environment):
 
 | Variable | Used for | Notes |
 |---|---|---|
@@ -80,6 +80,8 @@ WebP; AVIF/WebP + 1-year cache in `next.config.ts`), and `Container`/`PageHeader
 
 Next.js 16 (App Router) · Tailwind CSS 4 · TypeScript · tsx tests. Free calculator is pure
 client-side, no database.
+
+Hosted on Helm7 (`npm start` honours `$PORT`). Bare `deckhelm.com` redirects to `www.deckhelm.com`.
 
 ## Develop
 
