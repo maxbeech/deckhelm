@@ -7,7 +7,7 @@ import { computeCost, DECKING_LABEL, DEFAULT_DECKING, type Decking } from "@/lib
 import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type JoistSize, type Spacing, type Species } from "@/lib/deck-tables";
 import { US_STATES } from "@/lib/frost";
 import { SITE } from "@/lib/site";
-import { track } from "@/lib/openhelm-analytics";
+import { identify, track } from "@/lib/openhelm-analytics";
 import { Container } from "@/components/ui";
 import FramingDiagram from "./FramingDiagram";
 import ElevationDiagram from "./ElevationDiagram";
@@ -55,7 +55,7 @@ const CODE_APPENDIX = [
   ["AWC DCA6", "Prescriptive Residential Wood Deck Construction Guide"],
 ];
 
-export default function PlanStudio({ initialDeck }: { initialDeck: DeckInputs }) {
+export default function PlanStudio({ initialDeck, userRef }: { initialDeck: DeckInputs; userRef: string | null }) {
   const [inp, setInp] = useState<DeckInputs>(initialDeck);
   const [decking, setDecking] = useState<Decking>(DEFAULT_DECKING);
   const [meta, setMeta] = useState({ project: "", address: "", preparedFor: "", permit: "" });
@@ -63,7 +63,7 @@ export default function PlanStudio({ initialDeck }: { initialDeck: DeckInputs })
 
   // Reached only by a verified Pro buyer (app/plan/page.tsx gates on the signed
   // cookie). `activated=1` is set once, on the redirect straight out of a paid
-  // Stripe session (app/api/pro/activate/route.ts), so pro_purchase_completed
+  // Stripe session (app/api/pro/activate/route.ts), so purchase
   // fires exactly on the visit that completed the purchase, while
   // plan_studio_viewed fires on every visit including later re-engagement.
   const searchParams = useSearchParams();
@@ -71,9 +71,12 @@ export default function PlanStudio({ initialDeck }: { initialDeck: DeckInputs })
   useEffect(() => {
     if (trackedRef.current) return;
     trackedRef.current = true;
+    // A Pro buyer is a paid user from here on; identify before the events so
+    // they carry oh_plan=paid. userRef is hashed server-side from the session id.
+    if (userRef) identify({ userRef, plan: "paid" });
     track("plan_studio_viewed");
-    if (searchParams.get("activated") === "1") track("pro_purchase_completed");
-  }, [searchParams]);
+    if (searchParams.get("activated") === "1") track("purchase", { currency: "USD" });
+  }, [searchParams, userRef]);
 
   const r = useMemo(() => computeDeck(inp), [inp]);
   const sw = Math.min(60, Math.max(2, inp.width || 0));

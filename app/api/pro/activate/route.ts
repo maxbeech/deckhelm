@@ -19,7 +19,7 @@ export async function GET(req: Request) {
   if (!session || !session.paid) return NextResponse.redirect(failUrl);
 
   // Mark the redirect as a fresh activation (query param, not a cookie) so the
-  // client-side pro_purchase_completed event fires exactly once, on the visit
+  // client-side purchase event fires exactly once, on the visit
   // that actually just paid, and not on every later /plan revisit.
   planUrl.searchParams.set("activated", "1");
   const res = NextResponse.redirect(planUrl);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CheckoutButton from "@/components/CheckoutButton";
+import CheckoutOutcomeTracker from "@/components/CheckoutOutcomeTracker";
 import ObfuscatedEmail from "@/components/ObfuscatedEmail";
 import { Section, PageHeader, Eyebrow } from "@/components/ui";
 import { IconCheck } from "@/components/icons";
@@ -42,6 +43,7 @@ export default async function Pricing({ searchParams }: { searchParams: Promise<
 
   return (
     <>
+      <CheckoutOutcomeTracker outcome={checkout} />
       <Section tone="paper" className="pt-12 pb-10 sm:pt-16">
         <PageHeader
           eyebrow="Simple, honest pricing"
