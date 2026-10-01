@@ -92,3 +92,11 @@ export async function retrieveCheckoutSession(
     return null;
   }
 }
+
+// The Stripe session a valid Pro token was minted for, or null. Only call after
+// isValidProToken: it reads the payload without re-checking the signature.
+export function sessionIdFromToken(token?: string | null): string | null {
+  if (!isValidProToken(token)) return null;
+  const payload = token!.slice(0, token!.lastIndexOf(":"));
+  return payload.slice(TOKEN_VERSION.length + 1);
+}

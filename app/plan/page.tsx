@@ -5,6 +5,7 @@ import PlanStudio from "@/components/PlanStudio";
 import { Section, PageHeader, ButtonLink } from "@/components/ui";
 import { IconArrow } from "@/components/icons";
 import { DEFAULT_DECK, type DeckInputs } from "@/lib/deck";
+import { buyerRefFromToken } from "@/lib/analytics-ref";
 import { PRO_COOKIE, DECK_COOKIE, isValidProToken, metadataToDeck } from "@/lib/pro";
 
 export const dynamic = "force-dynamic";
@@ -55,6 +56,8 @@ export default async function PlanPage({
 
   if (!hasPro && !devPreview) return <LockedGate />;
 
+  const userRef = await buyerRefFromToken(jar.get(PRO_COOKIE)?.value);
+
   let initial: DeckInputs = { ...DEFAULT_DECK };
   const deckCookie = jar.get(DECK_COOKIE)?.value;
   if (deckCookie) {
@@ -75,7 +78,7 @@ export default async function PlanPage({
           intro="Fill in the project details, confirm your deck, then print or save the packet as a PDF for your building department. Everything recalculates live."
         />
       </Section>
-      <PlanStudio initialDeck={initial} />
+      <PlanStudio initialDeck={initial} userRef={userRef} />
     </>
   );
 }

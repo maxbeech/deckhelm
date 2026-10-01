@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-01: User journeys for OpenHelm
+
+- Refreshed the analytics client so `dataLayer` gets `arguments` objects (gtag.js drops plain arrays) and added `identify()`.
+- `pro_purchase_completed` is now the GA recommended `purchase` event.
+- Buyers are identified with `oh_user_ref` (hash of their Stripe session id, computed server-side) and `oh_plan=paid`.
+- New `pro_checkout_cancelled` and `purchase_confirmation_failed` events on `/pricing`.
+- Tests cover the ref vector, token-to-ref, and the `dataLayer` shape.
+
 ## 2026-09-30: Hosting moves from Vercel to Helm7
 
 - `npm start` now honours `$PORT`, which Helm7 assigns to the container.
