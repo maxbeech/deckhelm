@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p ${PORT:-3000}",
     "lint": "eslint",
-    "test": "tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts && tsx test/pro.test.mts && tsx test/boundary.test.mts && tsx test/seo.test.mts && tsx test/no-vercel.test.mts && tsx test/analytics.test.mts && tsx test/analytics-datalayer.test.mts && tsx test/blog-content.test.mts",
+    "test": "tsx test/sentry.test.mts && tsx test/deck.test.mts && tsx test/fuzz.test.mts && tsx test/monetisation.test.mts && tsx test/pro.test.mts && tsx test/boundary.test.mts && tsx test/seo.test.mts && tsx test/no-vercel.test.mts && tsx test/analytics.test.mts && tsx test/analytics-datalayer.test.mts && tsx test/blog-content.test.mts",
     "test:e2e": "tsx test/e2e-crawl.mts"
   },
   "dependencies": {

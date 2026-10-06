@@ -60,7 +60,16 @@ Set as variables on the Helm7 product (production environment):
 | `LEAD_FROM_EMAIL` | Lead-gen email | Optional; defaults to Resend's sandbox sender until `deckhelm.com` is verified in Resend |
 | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID` | Pro checkout | From a Stripe account |
 | `NEXT_PUBLIC_SITE_URL` | Checkout redirects | Optional; the canonical origin for Stripe success/cancel URLs (defaults to the request origin) |
+| `NEXT_PUBLIC_SENTRY_DSN`, `SENTRY_DSN` | Error, log and feedback reporting | Project `deckhelm_web` in the `maxed-labs` Sentry org. `SENTRY_ORG` and `SENTRY_PROJECT` are also set; `SENTRY_AUTH_TOKEN` (build only) uploads source maps |
 | `PRO_COOKIE_SECRET` | Pro access cookie | Optional; HMAC key for the lifetime-access cookie (falls back to `STRIPE_SECRET_KEY`) |
+
+## Error tracking and feedback
+
+Sentry (`deckhelm_web`) receives exceptions, console logs and user feedback. Everything passes through the
+scrubber in `lib/scrub.ts` first (emails, phone numbers, tokens and keys redacted; URL query strings
+stripped). Server code reports failures with `captureServerError` from `lib/observability.ts`. The
+"Send feedback" control lives in `components/FeedbackButton.tsx`. Browser traffic goes through a randomised
+tunnel route so ad blockers do not drop it.
 
 ## Design
 

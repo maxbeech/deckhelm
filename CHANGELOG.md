@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-10-06: Sentry standard
+
+- Errors, logs and feedback now go to the `deckhelm_web` Sentry project. Client, server and edge share one options helper (`lib/sentry-options.ts`); server and edge init moved into `instrumentation.ts`, with `onRequestError`.
+- Browser and server console output is forwarded as Sentry logs (`enableLogs`).
+- One scrubber (`lib/scrub.ts`) covers events, logs, breadcrumbs and transactions/spans: emails, phone numbers, bearer/JWT tokens, API keys (`sk_`, `pk_`, `whsec_`, `hlm_sk_`, `sntrys_` and so on) and password/secret/token fields are redacted, and query strings are stripped from URLs.
+- A visible "Send feedback" control in the header, mobile menu and footer opens the Sentry feedback form.
+- Added `app/error.tsx`; checkout, lead and Stripe-session failures go through `captureServerError` (`lib/observability.ts`).
+- `withSentryConfig` with a randomised tunnel route and source map upload; `.env.example` added.
+- New `test/sentry.test.mts`.
+
 ## 2026-10-01: User journeys for OpenHelm
 
 - Refreshed the analytics client so `dataLayer` gets `arguments` objects (gtag.js drops plain arrays) and added `identify()`.

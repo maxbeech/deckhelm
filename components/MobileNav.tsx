@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { FeedbackButton } from "@/components/FeedbackButton";
 
 const LINKS = [
   { href: "/calculators", label: "Calculators" },
@@ -41,6 +42,10 @@ export default function MobileNav() {
                 {l.label}
               </Link>
             ))}
+            <FeedbackButton
+              onOpen={() => setOpen(false)}
+              className="w-full border-b border-line/60 py-3 text-left font-mono text-sm uppercase tracking-wide text-ink-soft hover:text-ink"
+            />
             <Link
               href="/#calculator"
               onClick={() => setOpen(false)}

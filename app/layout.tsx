@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import MobileNav from "@/components/MobileNav";
+import { FeedbackButton } from "@/components/FeedbackButton";
 import { OpenHelmAnalytics } from "../lib/openhelm-analytics";
 
 const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", display: "swap" });
@@ -56,6 +57,7 @@ function Header() {
           <Link href="/blog" className="transition-colors hover:text-ink">Guides</Link>
           <Link href="/find-a-deck-builder" className="transition-colors hover:text-ink">Find a builder</Link>
           <Link href="/pricing" className="transition-colors hover:text-ink">Pricing</Link>
+          <FeedbackButton />
           <Link href="/#calculator" className="border border-ink bg-ink px-3.5 py-1.5 font-medium normal-case tracking-normal text-paper transition-colors hover:bg-rust hover:border-rust">
             Open calculator
           </Link>
@@ -134,7 +136,9 @@ function Footer() {
             It is a planning aid, not an engineering stamp: local amendments vary, so confirm member sizes,
             footing depth and connections with your building department before you build.
           </p>
-          <p className="mt-3 font-mono text-xs text-ink-faint">© {year} {SITE.name} · {SITE.domain}</p>
+          <p className="mt-3 font-mono text-xs text-ink-faint">
+            © {year} {SITE.name} · {SITE.domain} · <FeedbackButton variant="footer" />
+          </p>
         </div>
       </div>
     </footer>
