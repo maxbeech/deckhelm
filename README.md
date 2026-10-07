@@ -71,6 +71,8 @@ stripped; strings capped at 10k characters; if scrubbing throws the item is drop
 "Send feedback" control lives in `components/FeedbackButton.tsx`. Browser traffic goes through a randomised
 tunnel route so ad blockers do not drop it.
 
+The Sentry scrubber (`lib/scrub.ts`) redacts secrets of any length, backs up to a clean boundary when it truncates, and fails closed; its regression tests are in `test/scrub-hardening.test.mts`.
+
 ## Design
 
 A "builder's spec-plate" visual system, not a default Tailwind template: warm paper/ink palette
