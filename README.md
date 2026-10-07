@@ -67,7 +67,7 @@ Set as variables on the Helm7 product (production environment):
 
 Sentry (`deckhelm_web`) receives exceptions, console logs and user feedback. Everything passes through the
 scrubber in `lib/scrub.ts` first (emails, phone numbers, tokens and keys redacted; URL query strings
-stripped). Server code reports failures with `captureServerError` from `lib/observability.ts`. The
+stripped; strings capped at 10k characters; if scrubbing throws the item is dropped, never sent raw; feedback keeps only the reporter's own fields). Server code reports failures with `captureServerError` from `lib/observability.ts` (context is ids, codes and counts only). The
 "Send feedback" control lives in `components/FeedbackButton.tsx`. Browser traffic goes through a randomised
 tunnel route so ad blockers do not drop it.
 

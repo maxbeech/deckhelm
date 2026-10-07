@@ -4,7 +4,7 @@ import { renderToString } from "react-dom/server";
 import { createElement } from "react";
 import { scrubString, scrubValue, scrubEvent, scrubLog, scrubBreadcrumb, scrubTransaction, stripQuery } from "../lib/scrub.ts";
 import { sharedSentryOptions } from "../lib/sentry-options.ts";
-import { captureServerError, captureServerMessage } from "../lib/observability.ts";
+import { captureServerError, captureServerMessage, safeContext } from "../lib/observability.ts";
 import { FeedbackButton } from "../components/FeedbackButton.tsx";
 
 let pass = 0, fail = 0;
@@ -69,6 +69,38 @@ console.error = (...a: unknown[]) => { seen.push(`e:${a[0]}`); }; console.warn =
 captureServerError(new Error("boom"), { scope: "test" }); captureServerMessage("hmm", { scope: "test" });
 console.error = origErr; console.warn = origWarn;
 check("capture helper falls back visibly without a DSN", seen.includes("e:[test]") && seen.includes("w:[test]"), seen.join(","));
+
+// Fail closed: a scrubber that throws drops the item, never sends it raw.
+const hostile: any = { get message() { throw new Error("boom"); } };
+const boom = { get data() { throw new Error("boom"); } } as any;
+check("throwing beforeSend drops event", scrubEvent({ request: { get url() { throw new Error("x"); } } } as any) === null);
+check("throwing beforeSendTransaction drops event", scrubTransaction({ type: "transaction", get request() { throw new Error("x"); } } as any) === null);
+check("throwing beforeSendLog drops log", scrubLog(hostile) === null);
+check("throwing beforeBreadcrumb drops breadcrumb", scrubBreadcrumb(boom) === null);
+
+// Long adversarial strings: truncated, and finish quickly.
+const t0 = Date.now();
+const evil = ["a".repeat(200_000) + "@", "1".repeat(200_000), "password" + "-".repeat(200_000), "a@".repeat(100_000), "eyJ" + "a".repeat(200_000), "x.".repeat(100_000) + "@"];
+const outs = evil.map((e) => scrubString(e));
+check("adversarial strings are truncated and fast", Date.now() - t0 < 2000 && outs.every((o) => o.length <= 10_100), `${Date.now() - t0}ms`);
+check("secret past the cut is not shipped", !scrubString("x".repeat(20_000) + " sk_live_abcdef1234567890").includes("sk_live"));
+
+// Feedback must not bypass the scrubber; only reporter fields survive.
+const fb: any = scrubEvent({
+  type: "feedback",
+  contexts: { feedback: { name: "Jane", contact_email: "jane@example.com", message: "love it" }, other: { token: "t", note: "jane@example.com" } },
+  user: { email: "jane@example.com" },
+  request: { url: "https://x.com/a?token=1", headers: { cookie: "c" } },
+  extra: { apiKey: "k" },
+  tags: { who: "jane@example.com" },
+  breadcrumbs: [{ message: "visited jane@example.com", data: { url: "/x?token=1" } }],
+} as any)!;
+check("feedback keeps reporter name/email/message", fb.contexts.feedback.contact_email === "jane@example.com" && fb.contexts.feedback.message === "love it" && fb.user.email === "jane@example.com");
+check("feedback other fields still scrubbed", fb.contexts.other.token === "[redacted]" && !fb.contexts.other.note.includes("jane@") && fb.request.url === "https://x.com/a" && fb.extra.apiKey === "[redacted]" && !fb.tags.who.includes("jane@") && !fb.breadcrumbs[0].message.includes("jane@") && fb.breadcrumbs[0].data.url === "/x");
+
+// Capture context is ids/codes/counts only.
+const ctx = safeContext({ scope: "x", status: 502, ok: false, id: "cs_123", email: "jane@example.com", body: { a: 1 }, note: "free text with spaces" });
+check("capture context keeps ids only", ctx.status === 502 && ctx.ok === false && ctx.id === "cs_123" && !("email" in ctx) && !("body" in ctx) && !("note" in ctx) && !("scope" in ctx));
 
 const html = renderToString(createElement(FeedbackButton, {}));
 check("feedback control renders a labelled button", html.includes("Send feedback") && html.includes("<button"));

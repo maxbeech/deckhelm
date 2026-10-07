@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-07: Sentry scrubber hardening
+
+- The scrubber now fails closed: if scrubbing throws, `beforeSend`, `beforeSendLog`, `beforeBreadcrumb` and `beforeSendTransaction` drop the item instead of sending it raw.
+- Strings over 10k characters are truncated before any regex runs, and every pattern uses bounded, linear-time repetition.
+- Feedback events no longer skip scrubbing: only the reporter's `contexts.feedback` and `user` are kept; request, tags, extra, other contexts and breadcrumbs are scrubbed.
+- Capture helpers forward ids, codes, counts and short enum strings only.
+- Tests added for throwing scrubbers, adversarial long strings, feedback and capture context.
+
 ## 2026-10-06: Sentry standard
 
 - Errors, logs and feedback now go to the `deckhelm_web` Sentry project. Client, server and edge share one options helper (`lib/sentry-options.ts`); server and edge init moved into `instrumentation.ts`, with `onRequestError`.

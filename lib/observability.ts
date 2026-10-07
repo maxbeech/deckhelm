@@ -9,16 +9,27 @@ import * as Sentry from "@sentry/nextjs";
  * of throwing inside an error handler — an error path that can itself error is
  * how a bug becomes invisible.
  */
+/**
+ * Capture context is ids, codes, counts and enum values only. Anything else
+ * (free text, objects, long strings) is dropped, never forwarded.
+ */
+export function safeContext(context: Record<string, unknown>): Record<string, string | number | boolean> {
+  const out: Record<string, string | number | boolean> = {};
+  for (const [k, v] of Object.entries(context)) {
+    if (k === "scope") continue;
+    if (typeof v === "number" || typeof v === "boolean") out[k] = v;
+    else if (typeof v === "string" && v.length <= 64 && /^[\w.:-]*$/.test(v)) out[k] = v;
+  }
+  return out;
+}
+
 export function captureServerError(err: unknown, context: Record<string, unknown> = {}): void {
   const scope = typeof context.scope === "string" ? context.scope : "server";
   try {
     if (process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN) {
       Sentry.withScope((s) => {
         s.setTag("scope", scope);
-        for (const [k, v] of Object.entries(context)) {
-          if (k === "scope") continue;
-          s.setExtra(k, v);
-        }
+        for (const [k, v] of Object.entries(safeContext(context))) s.setExtra(k, v);
         s.captureException(err instanceof Error ? err : new Error(String(err)));
       });
       return;
@@ -41,10 +52,7 @@ export function captureServerMessage(message: string, context: Record<string, un
       Sentry.withScope((s) => {
         s.setTag("scope", scope);
         s.setLevel("warning");
-        for (const [k, v] of Object.entries(context)) {
-          if (k === "scope") continue;
-          s.setExtra(k, v);
-        }
+        for (const [k, v] of Object.entries(safeContext(context))) s.setExtra(k, v);
         s.captureMessage(message);
       });
       return;
