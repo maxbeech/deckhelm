@@ -42,7 +42,7 @@ check("event exception scrubbed", !ev.exception.values[0].value.includes("sk_liv
 check("event extra scrubbed", ev.extra.apiKey === "[redacted]" && !ev.extra.detail.includes("415"));
 check("event breadcrumbs scrubbed", !ev.breadcrumbs[0].message.includes("jane@") && ev.breadcrumbs[0].data.url === "/x" && ev.breadcrumbs[0].data.to === "/y");
 
-const bc = scrubBreadcrumb({ message: "token sk_live_abcdef1234567890", data: { from: "/a?b=1", password: "p" } });
+const bc = scrubBreadcrumb({ message: "token sk_live_abcdef1234567890", data: { from: "/a?b=1", password: "p" } })!;
 check("breadcrumb message+data", !bc.message!.includes("sk_live") && bc.data!.from === "/a" && bc.data!.password === "[redacted]");
 
 const tx: any = scrubTransaction({
