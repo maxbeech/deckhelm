@@ -44,6 +44,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const p = getPost(slug);
   if (!p) notFound();
   const rel = p.related ? getCalc(p.related) : undefined;
+  // Up to three sibling guides: same calculator first, then same category.
+  const moreGuides = POSTS.filter((x) => x.slug !== p.slug)
+    .map((x) => ({ x, score: (p.related && x.related === p.related ? 2 : 0) + (x.category === p.category ? 1 : 0) }))
+    .filter((e) => e.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((e) => e.x);
 
   const headings = p.body.filter((b) => b.type === "h2") as { type: "h2"; text: string }[];
   const faqBlock = p.body.find((b) => b.type === "faq") as { type: "faq"; items: { q: string; a: string }[] } | undefined;
@@ -186,6 +193,20 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           return <p key={i} className="leading-[1.75] text-ink">{renderInline(b.text, `p${i}`)}</p>;
         })}
       </div>
+
+      {moreGuides.length > 0 && (
+        <nav aria-label="Related guides" className="mt-12">
+          <h2 className="font-display text-lg font-semibold text-ink">Keep reading</h2>
+          <ul className="mt-3 space-y-2">
+            {moreGuides.map((g) => (
+              <li key={g.slug}>
+                <Link href={`/blog/${g.slug}`} className="font-medium text-rust underline">{g.title}</Link>
+                <span className="block text-sm text-ink-soft">{g.description}</span>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
 
       <div className="mt-12 border border-rust-line bg-rust-tint p-6">
         <h2 className="font-display text-lg font-semibold text-ink">Size your deck to code, free</h2>
