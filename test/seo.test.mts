@@ -34,6 +34,13 @@ check("guide dates are truthful sitemap lastmod values", POSTS.every((post) => u
 check("robots declares the canonical host", robotsConfig.host === SITE.url);
 check("robots points crawlers at the www sitemap", robotsConfig.sitemap === `${SITE.url}/sitemap.xml`);
 check("ledger flashing 404 permanently redirects", redirects.some((redirect) => redirect.source === "/blog/deck-ledger-flashing-guide" && redirect.destination === "/blog/deck-ledger-board-attachment" && redirect.permanent));
+for (const [from, to] of [
+  ["deck-design-load-requirements", "how-much-weight-can-a-deck-hold"],
+  ["deck-board-spacing-guide", "deck-joist-spacing-12-vs-16-vs-24"],
+  ["deck-blocks-vs-concrete-footings", "deck-footing-size-and-depth"],
+]) {
+  check(`retired guide ${from} redirects to a live guide`, redirects.some((r) => r.source === `/blog/${from}` && r.destination === `/blog/${to}` && r.permanent) && POSTS.some((p) => p.slug === to));
+}
 
 console.log(`\n${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

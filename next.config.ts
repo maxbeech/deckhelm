@@ -11,6 +11,23 @@ const nextConfig: NextConfig = {
         destination: "/blog/deck-ledger-board-attachment",
         permanent: true,
       },
+      // Retired draft guides that were once crawled and now 404. Each goes to
+      // the closest live guide on the same topic.
+      {
+        source: "/blog/deck-design-load-requirements",
+        destination: "/blog/how-much-weight-can-a-deck-hold",
+        permanent: true,
+      },
+      {
+        source: "/blog/deck-board-spacing-guide",
+        destination: "/blog/deck-joist-spacing-12-vs-16-vs-24",
+        permanent: true,
+      },
+      {
+        source: "/blog/deck-blocks-vs-concrete-footings",
+        destination: "/blog/deck-footing-size-and-depth",
+        permanent: true,
+      },
     ];
   },
   images: {
