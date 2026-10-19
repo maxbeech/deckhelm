@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-19: llms.txt
+
+- **New `public/llms.txt`.** A plain-text index served at `/llms.txt` for AI assistants: the site name, a one-paragraph summary, and links to the main, guide and contact pages. Every link is a sitemap URL.
+- **Tests.** `test/llms-txt.test.mts` checks the heading, summary, canonical www host, and that each linked page is in `app/sitemap.ts`. Added to the `test` script.
+
 ## 2026-10-07: Sentry scrubber security pass
 
 - **Long secrets.** JWTs, bearer tokens, vendor keys (`sk_`, `whsec_`, `hlm_sk_`, `sntrys_`) and `key=value` secrets of any length are now redacted whole. The old bounded patterns left the tail of anything longer than their limit.

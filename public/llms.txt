@@ -1,0 +1,20 @@
+# DeckHelm
+
+> DeckHelm is a free deck building code calculator. It sizes joists, beams, footings, posts and stairs to the IRC R507 deck code, using the real span tables, your state's frost depth, and produces a permit-ready breakdown.
+
+## Main pages
+
+- [Home and calculator](https://www.deckhelm.com/): the free deck calculator
+- [Calculators](https://www.deckhelm.com/calculators): all deck calculators
+- [Find a deck builder](https://www.deckhelm.com/find-a-deck-builder): finding a local deck builder
+- [Pricing](https://www.deckhelm.com/pricing): plans and pricing
+- [Methodology](https://www.deckhelm.com/methodology): how the calculations are derived
+
+## Guides
+
+- [Blog](https://www.deckhelm.com/blog): deck construction and permit guides
+- [State frost depth and permit notes](https://www.deckhelm.com/states): state-level reference pages
+
+## Contact
+
+- Email: hello@deckhelm.com
