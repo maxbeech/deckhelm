@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-20: Content refresh (joist span, weight)
+
+- **Joist span guide.** Added a sourced note on where the Southern Pine No.2 span figures come from (load basis, wet-service factor), cross-checked against two published charts, and a warning that older code printings list longer spans.
+- **Deck weight guide.** Replaced the unsourced "6,000 injured a year, 15-20% hospitalised" CPSC claim with the AP analysis of CPSC emergency-room data (about 6,500 injuries, 2003 to 2015), and removed the unsupported claim that most collapses trace to ageing connections.
+- **Deferred.** Beam span table (R507.5, guide and calculator) and the state page template are unchanged pending verification and a policy decision.
+
 ## 2026-10-19: llms.txt
 
 - **New `public/llms.txt`.** A plain-text index served at `/llms.txt` for AI assistants: the site name, a one-paragraph summary, and links to the main, guide and contact pages. Every link is a sitemap URL.
