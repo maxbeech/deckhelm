@@ -1,5 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
 import { scrubBreadcrumb, scrubEvent, scrubLog, scrubTransaction } from "@/lib/scrub";
+import { withoutKnownNoise } from "@/lib/sentry-noise";
 
 /**
  * The one place the options shared by every Sentry.init live (browser in
@@ -13,7 +14,7 @@ export function sharedSentryOptions() {
     environment: process.env.NODE_ENV,
     // Visitors' emails and phone numbers are not ours to ship anywhere.
     sendDefaultPii: false,
-    beforeSend: scrubEvent,
+    beforeSend: withoutKnownNoise(scrubEvent),
     beforeSendTransaction: scrubTransaction,
     beforeBreadcrumb: scrubBreadcrumb,
     // Structured logs, plus every console call forwarded as a log line.

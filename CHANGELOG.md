@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-25: Keep scanner probes out of Sentry
+
+- **Root cause.** Crawlers and scanners POST to any URL with `Accept: text/x-component`, a made-up `Next-Action` id (`cachefn`) and the `X-Middleware-Subrequest` exploit header. The app already refused them, but Next logged "Invariant: Expected RSC response, got text/plain" for the refusal and `onRequestError` reported it.
+- **Sentry filter.** `lib/sentry-noise.ts` drops those events in `beforeSend` (via `sharedSentryOptions`) before they are scrubbed or sent. It matches the exploit header, a `Next-Action` id that is not a real hash, and "Failed to find Server Action" from a request with no real action id. A real id with that error (a genuine deploy-skew client) still reports.
+- **Proxy.** This app has no proxy or middleware, and Next 16 ignores the header, so nothing else was needed. Header logic lives in `lib/scanner-probe.ts`.
+- **Injected bridge rejection.** "Object Not Found Matching Id:N, MethodName:update, ParamCount:4", a promise rejection from a native bridge some in-app browsers inject, is dropped in the same filter. No frame of ours is involved.
+- **Tests.** `test/sentry-noise.test.ts` (added to the `test` script).
+
 ## 2026-10-20: Content refresh (joist span, weight)
 
 - **Joist span guide.** Added a sourced note on where the Southern Pine No.2 span figures come from (load basis, wet-service factor), cross-checked against two published charts, and a warning that older code printings list longer spans.

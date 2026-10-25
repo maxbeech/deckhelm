@@ -59,7 +59,7 @@ const log: any = scrubLog({ level: "info", message: "user jane@example.com paid 
 check("log message+attributes", !log.message.includes("jane@") && !log.message.includes("sk_live") && log.attributes.token === "[redacted]" && !log.attributes.note.includes("415"));
 
 const opts: any = sharedSentryOptions();
-check("shared options wire every scrubber and logs", opts.enableLogs === true && opts.beforeSend === scrubEvent && opts.beforeSendLog === scrubLog && opts.beforeSendTransaction === scrubTransaction && opts.beforeBreadcrumb === scrubBreadcrumb && opts.sendDefaultPii === false);
+check("shared options wire every scrubber and logs", opts.enableLogs === true && typeof opts.beforeSend === "function" && opts.beforeSendLog === scrubLog && opts.beforeSendTransaction === scrubTransaction && opts.beforeBreadcrumb === scrubBreadcrumb && opts.sendDefaultPii === false);
 check("console forwarding integration present", opts.integrations.some((i: any) => /console/i.test(i.name)));
 
 // Capture helper degrades to a console line without a DSN, never throws.
