@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import LeadForm from "@/components/LeadForm";
 import ObfuscatedEmail from "@/components/ObfuscatedEmail";
@@ -105,6 +106,38 @@ export default function FindABuilder() {
               </p>
             </div>
           </div>
+        </div>
+      </Section>
+
+      <Section tone="dim" className="py-14 sm:py-16">
+        <Eyebrow>Before you request quotes</Eyebrow>
+        <h2 className="mt-2 font-display text-2xl font-semibold text-ink sm:text-3xl">Get your numbers first</h2>
+        <div className="mt-4 max-w-3xl space-y-4 text-sm leading-relaxed text-ink-soft">
+          <p>
+            Contractors quote faster and more accurately when you arrive with a clear project: the deck size, the
+            material you prefer and the footing depth your area calls for. DeckHelm&apos;s free calculators work these
+            out against the IRC R507 / AWC DCA6 prescriptive deck code, so you can compare any quote against a code-based
+            baseline.
+          </p>
+          <ul className="list-disc space-y-2 pl-5">
+            <li>
+              <Link href="/calculators" className="font-medium text-ink underline">Deck calculators</Link>: size joists,
+              beams, posts, footings and stairs for your deck.
+            </li>
+            <li>
+              <Link href="/plan" className="font-medium text-ink underline">Plan your deck</Link>: a permit-ready
+              breakdown of the whole project you can hand to a builder.
+            </li>
+            <li>
+              <Link href="/blog/how-much-does-a-deck-cost" className="font-medium text-ink underline">How much does a deck cost?</Link>{" "}
+              and{" "}
+              <Link href="/blog/is-it-cheaper-to-build-your-own-deck" className="font-medium text-ink underline">is it cheaper to build your own deck?</Link>
+            </li>
+            <li>
+              <Link href="/blog/do-i-need-a-permit-to-build-a-deck" className="font-medium text-ink underline">Do I need a permit to build a deck?</Link>{" "}
+              and local footing depths on the <Link href="/states" className="font-medium text-ink underline">state pages</Link>.
+            </li>
+          </ul>
         </div>
       </Section>
 
