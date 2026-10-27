@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-27: Refresh joist hanger and 2x8 vs 2x10 guides
+
+- **Joist hangers guide.** Added the IRC R317.3 connector coating and fastener rules (G185 minimum, hot-dipped galvanized, stainless, silicon bronze or copper), Simpson ZMAX guidance for treated lumber, and tightened the galvanising bullet.
+- **2x8 vs 2x10 guide.** Removed the unverifiable "2026 tariffs" and July-2026 NAHB figures (the post was dated June, so it cited data it could not have had); points readers to the NAHB index for the live trend. Corrected the door-threshold claim: the IRC limit is R311.3.2 (7-3/4 in. below the threshold), not "about an inch". The publish date stays as it was: the blog content test pins it, and this run did not change the frontmatter schema.
+- **Not changed.** Span figures were already checked against the IRC table and are unchanged. Publish dates and frontmatter are unchanged.
+- **Tests.** `test/blog-content.test.mts` passes unchanged.
+
 ## 2026-10-25: Keep scanner probes out of Sentry
 
 - **Root cause.** Crawlers and scanners POST to any URL with `Accept: text/x-component`, a made-up `Next-Action` id (`cachefn`) and the `X-Middleware-Subrequest` exploit header. The app already refused them, but Next logged "Invariant: Expected RSC response, got text/plain" for the refusal and `onRequestError` reported it.
