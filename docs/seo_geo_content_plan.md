@@ -1,70 +1,135 @@
-# Content Production Prioritisation Matrix — DeckHelm
+# Content Production Prioritisation Matrix: DeckHelm
 
-Hybrid SEO/GEO reference for writers. Volumes are US average monthly searches from Google Ads Keyword Planner (pulled June 2026); GEO picks are editorial judgement on question-format terms likely to surface in AI Overviews, Perplexity and similar — there's no separate citation-tracking tool behind those numbers, so treat the GEO column as "structure the answer this way", not as a ranking guarantee. No prior keyword set or old-site data was supplied, so this is built fresh from the live calculator, two competitor sources (HomeAdvisor's deck cost guide, decks.com) and our own pages.
+Hybrid SEO/GEO reference for writers. Volumes are US average monthly searches from Google Ads Keyword Planner, seeded from deckhelm.com and decks.com, run 2 Nov 2026. Figures marked (28 Oct) come from the Keyword Planner run of 28 Oct 2026. Terms marked unverified were not returned by Keyword Planner this run, so they carry no volume. Every keyword traces to a live page, a post title in the repo, or the decks.com seed.
 
-## 1. The Authority Pillars
+Format per line: keyword | volume / competition. GEO picks are editorial judgement on question-format terms. Treat the GEO notes as "structure the answer this way", not as a ranking guarantee.
 
-These are the terms that define what DeckHelm *is*. Each needs its own pillar page or hub, not a blog post.
+## 1. Authority Pillars
 
-- **deck building** (74.0k/mo) — Entity Category: *Home Improvement Project.* The umbrella term; homepage should own this.
-- **deck builder near me** (60.5k/mo, also "decks near me" / "decking contractors near me", same volume) — Entity Category: *Local Service / Directory.* This is the lead-gen wedge — needs its own hub distinct from the calculator.
-- **deck contractors** (12.1k/mo) — Entity Category: *Organisation.* Directory/listing page, low competition for the volume.
-- **deck calculator** (12.1k/mo) — Entity Category: *Software Tool.* Already our core product; make sure it's the canonical landing page, not buried under a single calc slug.
-- **deck plans** (8.1k/mo, "deck blueprints" same volume) — Entity Category: *Digital Product.* This is the PDF/Pro plan's natural home page.
-- **composite decking boards** (22.2k/mo) — Entity Category: *Building Material.* Affiliate anchor — Trex/TimberTech style product comparison page.
-- **deck screws** (22.2k/mo, "joist hangers" 18.1k/mo close behind) — Entity Category: *Hardware Product.* Affiliate anchor tied to the materials list output.
+These define what DeckHelm is. Each needs its own hub page, not a blog post.
 
-## 2. The Zero-Click & GEO Champions
+- deck building | 74,000 / low (28 Oct). Entity Category: Home Improvement Project. The homepage should own this.
+- deck builder near me | 60,500 / medium (28 Oct). Entity Category: Local Service / Directory. Lead-gen hub at /find-a-deck-builder, kept separate from the calculator.
+- deck calculator | 12,100 / medium. Entity Category: Software Tool. The canonical landing page for the calculators.
+- deck contractors | 9,900 / medium (28 Oct). Entity Category: Organisation. Directory and listing page.
+- deck plans | 6,600 / medium (28 Oct). Entity Category: Digital Product. Home of the Pro permit plan.
 
-Question and comparison terms — write these so an AI assistant can lift a complete, correct answer without needing the rest of the page.
+## 2. The Zero-Click and GEO Champions
 
-- **do I need a permit to build a deck** (480/mo) — must mention: IRC R507, local building department, deck height threshold, inspection stages.
-- **how far apart should deck joists be** (480/mo) — must mention: 12"/16"/24" o.c. spacing, lumber species, IRC R507.6 table.
-- **deck vs patio** (1.6k/mo) — must mention: upfront cost, maintenance, drainage, resale value, footing requirement.
-- **composite decking vs wood** / **trex vs wood decking cost** (390/mo) — must mention: cost per sq ft, lifespan, staining/sealing, warranty length.
-- **how to attach a ledger board to a house** (390–720/mo, seasonal) — must mention: flashing, lag/through-bolt spacing, rim joist condition, IRC R507.9.1.3.
-- **how much weight can a deck hold** (320/mo) — must mention: 40 psf live load, 10 psf dead load, joist span, beam size.
-- **is it cheaper to build your own deck** / **can I build a deck myself** (10–40/mo, low volume but high AI-answer relevance) — must mention: labour share of total cost (~50%), permit cost, tool list, skill level.
-- **2x8 vs 2x10 deck joists** (40/mo) — must mention: span difference, cost difference, when each is code-legal.
+Write these so an assistant can lift a complete, correct answer without the rest of the page.
+
+- do I need a permit to build a deck | unverified. Must mention: IRC R507, local building department, height threshold, inspection stages.
+- how far apart should deck joists be | unverified. Must mention: 12, 16 and 24 inch o.c. spacing, lumber species, IRC R507.6.
+- how much weight can a deck hold | unverified. Must mention: 40 psf live load, 10 psf dead load, joist span, beam size.
+- how to attach a ledger board to a house | unverified. Must mention: flashing, lag or through-bolt spacing, rim joist condition, IRC R507.9.1.3.
+- deck vs patio | unverified. Must mention: upfront cost, maintenance, drainage, resale value, footing requirement.
+- composite decking vs wood | unverified. Must mention: cost per square foot, lifespan, staining or sealing, warranty length.
+- can I build a deck myself | unverified. Must mention: labour share of total cost, permit cost, tool list, skill level.
+- 2x8 vs 2x10 deck joists | unverified. Must mention: span difference, cost difference, when each is code-legal.
+
+Connected Entities: IRC R507.5 and R507.6 span tables, AWC DCA6, local building department, frost line (IRC R403.1.4), Trex, TimberTech.
 
 ## 3. The High-Intent Closers
 
-Commercial-signal terms — these convert, whether to a Pro plan, an affiliate click or a contractor lead.
+These convert, whether to a Pro plan, an affiliate click or a contractor lead.
 
-- **cost to build a deck** / **price to build a deck** (2.4k/mo each) — attributes: size, material tier, DIY vs contractor, regional range.
-- **deck cost per square foot** (1.3k/mo) — attributes: low/high by material, labour vs material split.
-- **labor cost to build a deck per square foot** (1.6k/mo) — attributes: regional rate, licence/insurance, typical markup.
-- **deck installation cost** / **deck replacement cost** (1.6k–2.4k/mo) — attributes: removal fee, structure cost, permit, timeline.
-- **trex decking cost** (8.1k/mo) — attributes: $/sq ft installed, vs PT pine, maintenance saving over time.
-- **composite deck cost** (1.6k/mo) — attributes: material premium, lifetime cost vs wood.
-- **affordable deck builders near me** (480/mo) — attributes: free quote, reviews, licensed & insured, response speed.
-- **average cost to build a deck** / **new deck cost** (480–1k/mo) — attributes: national average, size bands, what's included.
+- cost to build a deck | 1,900 / medium (2 Nov)
+- price to build a deck | 1,900 / medium (2 Nov)
+- deck cost | 1,300 / high (2 Nov)
+- deck replacement cost | 2,400 / medium (2 Nov)
+- deck installation cost | 1,300 / medium (2 Nov)
+- new deck cost | 1,000 / high (2 Nov)
+- deck cost per square foot | 1,000 / medium (2 Nov). Already the target of /blog/how-much-does-a-deck-cost.
+- composite deck cost | 1,300 / high (2 Nov)
+- average cost to build a deck | 390 / medium (2 Nov)
+- trex decking cost | unverified
+- labor cost to build a deck per square foot | unverified
+- affordable deck builders near me | unverified
+
+Attribute Entities: size (length and width, square feet), material tier (pressure-treated, composite), DIY vs contractor, regional range, removal fee, permit, timeline.
 
 ## 4. The Hidden Gems
 
-Low-competition, underpriced terms we can own quickly.
+Low competition and a real niche. The calculator already does the span and footing maths, so these are answers we can give precisely.
 
-- **deck permit** (6.6k/mo, competition index 1) — huge volume, near-zero competition. We already have 50 state pages; this is the obvious internal-linking target.
-- **concrete bags calculator** (14.8k/mo, low competition) — outside the deck niche but directly buildable from the footing engine; could pull in broad DIY traffic as a standalone tool.
-- **deck stain calculator** (2.4k/mo, competition index 2) — adjacent tool we don't have yet; cheap to build, almost no competition for the volume.
-- **joist span calculator** (1.6k/mo, competition index 1) — already targeted; worth a second push since competition is this thin.
-- **beam span calculator** (1.0k/mo, low) and **footing calculator** (880/mo, low) — same logic, smaller volume.
-- **free deck plans pdf** (720/mo, low) — sits right on top of the Pro PDF offering; an obvious conversion bridge.
-- **state frost-depth queries** (e.g. "minnesota frost depth", 50/mo each but ×50 states) — tiny individually, a real moat in aggregate because almost nobody else has built the full set.
+- deck permit | 4,400 / low (2 Nov). Link to /blog/do-i-need-a-permit-to-build-a-deck. State pages stay out of search until the indexing decision is made.
+- deck joist span | 4,400 / low (2 Nov). Answered by the R507.6 joist engine.
+- deck stair calculator | 3,600 / low (2 Nov). Stair layout to IRC R311.7.
+- decking joist spacing calculator | 1,900 / low (2 Nov). Spacing is already a joist input.
+- joist span calculator | 1,000 / low (2 Nov). Competition is thin for the volume.
+- deck footing calculator | 1,000 / low (2 Nov). Footing size from tributary load and soil bearing.
+- deck joist calculator | 880 / low (2 Nov).
+- deck beam span calculator | 720 / low (2 Nov). Answered by the R507.5 beam engine.
+- deck beam calculator | 480 / low (2 Nov).
+- deck footing size | 170 / low (2 Nov). Targets /blog/deck-footing-size-and-depth.
 
 ## 5. Semantic Clusters
 
-Remaining long-tail, grouped and roughly ordered by opportunity.
+Ordered by volume, then low difficulty, then brand fit. Each cluster names its parent pillar.
 
-- **Cluster: Joist & Framing Mechanics** — parts of the framing system. deck joists (5.4k), deck joist spacing (5.4k), building code (5.4k), irc code (1.6k), deck joist spacing 12 vs 16 vs 24 (existing post), 2x8 vs 2x10 deck joists.
-- **Cluster: Footings & Foundations** — parts of the substructure. deck footings (9.9k), concrete footings (12.1k), deck piers (1k), deck post footings (880), deck supports (1.6k), deck footing tubes (30), how deep should deck footings be (90), how many footings does a deck need (10).
-- **Cluster: Stairs & Access** — types of stair build. deck stairs (9.9k), stair stringers (9.9k), building stairs (2.9k), stair calculator (33.1k — bigger than the deck-specific terms; worth a generic stair-calculator entry page that funnels into the deck stair tool).
-- **Cluster: Materials & Hardware (affiliate)** — products used to build a deck. joist hangers (18.1k), simpson strong tie deck (110), post base hardware (30), ledger board flashing (1.3k), pressure treated lumber prices (1k), deck railing kits (2.9k), deck lumber (1.9k), lumber calculator (1.9k), galvanised vs stainless deck screws.
-- **Cluster: Design & Planning Tools** — types of planning product, a clear competitor strength (decks.com, Trex, Home Depot all rank here). deck design software (2.9k), deck design tool (1.3k), free deck design tool/app (1.6k/210), online deck designer (390), trex deck designer/builder/planner (8.1k/1k/880), home depot deck builder/designer (880/720), deck blueprint maker (90), design a deck online free (390).
-- **Cluster: Cost & Estimating** — ways of asking the cost question. deck material cost calculator (110), deck size calculator (390), wood deck calculator (320), deck estimate calculator (110), cost to build a deck calculator (70), deck quote calculator (20), backyard deck cost (170).
-- **Cluster: Contractor & Installation Services** — the lead-gen side, types of job a contractor is hired for. deck installation (4.4k), deck repair (9.9k), deck construction (4.4k), deck construction near me (1.6k), deck installation near me (2.9k), deck replacement near me (1.3k), deck building company near me (260), licensed deck contractor (20), deck builders association (10).
-- **Cluster: Project Variants** — types of deck by situation, good supporting/long-tail content. small deck ideas (2.4k), second story deck cost (70), pool deck cost calculator (10), floating deck vs attached deck (existing post), ground level deck without footings (10).
+Cluster: Calculators (parent: deck calculator)
+- deck board calculator | 12,100 / medium
+- deck estimator | 12,100 / medium
+- deck building calculator | 12,100 / medium
+- deck material calculator | 1,900 / medium
+- free deck calculator | 880 / medium
+- deck estimate cost | 480 / medium
+- deck pricing calculator | 480 / medium
+- deck lumber calculator | 390 / medium
+- deck size calculator | 390 / low
+- wood deck calculator | 320 / medium
+- deck framing calculator | 260 / medium
+- composite deck calculator | 260 / medium
+- deck spacing calculator | 170 / low
+- deck layout calculator | 90 / low
 
-**A note on sequencing:** Pillars and Closers first — they're what the affiliate and lead-gen launches actually need live. Hidden Gems next, since the competition is thin and the existing engine already does most of the work (frost depth, footing maths). GEO Champions can be folded into the pillar pages as FAQ blocks rather than built as standalone posts — cheaper to produce and keeps the entity signals on one URL. Semantic Clusters are the long tail to fill in once the above is shipped; don't let them crowd out the priority work above.
+Cluster: Joists and Footings (parent: deck calculator)
+- joist calculator | 590 / low
+- decking joists size | 590 / low
+- deck footing depth | 260 / verified (GSC opportunity). Targets /blog/deck-footing-size-and-depth.
 
-**Status (2026-06-30):** the "deck builder near me" pillar now has a live home at `/find-a-deck-builder` (lead form + FAQ block covering two of the GEO Champions above). It isn't yet built out as a full pillar page targeting the cluster's volume — that's the next content task once this gets a verified domain and Search Console data to work from.
+Cluster: Cost and Estimating (parent: deck building)
+- decks | 74,000 / high. Broad head term, shared with the pillar.
+- deck construction cost | 1,900 / medium
+- deck cost calculator | 1,600 / medium
+- deck cost estimator | 1,300 / medium
+- trex deck estimator | 1,000 / medium
+- average deck cost | 720 / medium
+- deck pricing | 720 / high
+- cost to build a deck per square foot | 590 / medium
+- deck material cost calculator | 140 / medium
+- wood deck cost | 390 / high
+- composite decking cost per square foot | 390 / high
+- pressure treated deck cost per square foot | 390 / low
+- deck price per square foot | 320 / medium
+- deck quote | 320 / medium
+- deck estimate | 210 / high
+- 12x12 deck cost | 480 / high
+- 10x10 deck cost | 480 / high
+- 20x20 deck cost | 320 / high
+- 12x20 deck cost | 170 / medium
+- cost of a new deck calculator | 10 / high
+
+Cluster: Contractors and Lead Generation (parent: deck builder near me)
+- deck builder | 74,000 / low (28 Oct)
+- deck near me | 60,500 / medium (28 Oct)
+- deck contractors near me | 60,500 / medium (28 Oct)
+- deck building companies near me | 60,500 / medium (28 Oct)
+- deck company | 5,400 / medium (28 Oct)
+- deck installation near me | 2,900 / low (2 Nov)
+- deck construction | 3,600 / low (2 Nov)
+- deck quotes near me | 210 / high
+- deck estimates near me | 90 / high
+
+Cluster: Plans and Blueprints (parent: deck plans)
+- deck blueprints | 6,600 / medium (28 Oct)
+- planning a deck | 6,600 / medium (28 Oct)
+- deck plans for permit | 90 / medium
+
+Cluster: Materials and Design (parent: deck building)
+- deck composite | 90,500 / high (28 Oct)
+- deck railing ideas | 18,100 / high (2 Nov)
+
+Excluded: timbertech deck (27,100, navigational brand query, low brand fit for an independent calculator). lowes deck designer (5,400, navigational brand query).
+
+Sequencing: pillars and closers first, since the lead-gen and affiliate pages need them live. Hidden gems next. GEO champions can fold into the pillar pages as FAQ blocks, which keeps the entity signals on one URL. Semantic clusters fill in last and should not crowd out the priority work above.
