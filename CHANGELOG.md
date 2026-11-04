@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-04: Refresh pressure-treated lumber price post
+
+- **Premise corrected.** The post said framing lumber was climbing (July 2026 NAHB figures). The latest NAHB framing lumber reading (Madison's Lumber Price Index, 30 Oct 2026, published 2 Nov) is $459.10 per 1,000 board feet: down 7.2% week over week, 9.4% month over month, 4.4% year over year. Rewritten around that reading, with the futures figure ($520.00) and the preliminary duty rates (combined 25.9%, down from 35.2%, not final; 10% Section 232 tariff keeps the total at 35.9%), all as stated on the NAHB page.
+- **Removed.** The unsourced "licensed-contractor reviewers" quote; replaced with a verbatim NAHB sentence attributed to NAHB.
+- **Not changed.** Publish date (2026-09-30) stays: `test/blog-content.test.mts` pins the expansion-batch window, and there is no separate "updated" field in the post schema. A visible "updated" date needs a schema change and is not part of this refresh.
+- **Tests.** `npm test` (11 files) passes; `tsc --noEmit`, eslint on `lib/posts.ts` and `npm run build` pass.
+
 ## 2026-10-27: Refresh joist hanger and 2x8 vs 2x10 guides
 
 - **Joist hangers guide.** Added the IRC R317.3 connector coating and fastener rules (G185 minimum, hot-dipped galvanized, stainless, silicon bronze or copper), Simpson ZMAX guidance for treated lumber, and tightened the galvanising bullet.
