@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-06: active return measurement
+
+- Record first measured visits and intentional returns using the shared three-hour, seven-day browser contract.
+- Preserve the product analytics boundary and add regression tests for passive tabs, continuous sessions, consent and storage errors.
+
 ## 2026-11-04: Refresh pressure-treated lumber price post
 
 - **Premise corrected.** The post said framing lumber was climbing (July 2026 NAHB figures). The latest NAHB framing lumber reading (Madison's Lumber Price Index, 30 Oct 2026, published 2 Nov) is $459.10 per 1,000 board feet: down 7.2% week over week, 9.4% month over month, 4.4% year over year. Rewritten around that reading, with the futures figure ($520.00) and the preliminary duty rates (combined 25.9%, down from 35.2%, not final; 10% Section 232 tariff keeps the total at 35.9%), all as stated on the NAHB page.
