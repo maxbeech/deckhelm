@@ -23,6 +23,6 @@ test("an invalid custom design waits for a valid calculation and then counts onc
 });
 test("the UI reports on result changes, including changes that keep the same joist size", () => {
   const source = readFileSync(new URL("../components/DeckCalculator.tsx", import.meta.url), "utf8");
-  assert.ok(source.includes("resultReporter.current!(startedRef.current, r)"));
-  assert.ok(source.includes("}, [r, cost])"));
+  assert.ok(source.includes("reportResult(hasUserChange, r)"));
+  assert.ok(source.includes("}, [r, cost, reportResult, hasUserChange])"));
 });

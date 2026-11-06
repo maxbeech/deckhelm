@@ -279,3 +279,5 @@ No third-party keys (`NEXT_PUBLIC_AMAZON_TAG`, `RESEND_API_KEY`, `LEAD_NOTIFY_EM
 
 See git log for the calculator engine, span tables, state pages, blog and Pro checkout scaffold
 built before this changelog was introduced.
+
+Generated Node analytics tests assert the empty error count without narrowing the mutable collection to `never[]`; storage-error checks remain unchanged.

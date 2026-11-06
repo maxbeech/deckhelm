@@ -51,21 +51,24 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
     width: sw, projection: sp, decking, postCount: r.postCount,
     needsGuard: r.needsGuard, stairTreads: r.stairs?.treads ?? 0, hasStairs: !!r.stairs,
   }), [sw, sp, decking, r.postCount, r.needsGuard, r.stairs]);
+  const [hasUserChange, setHasUserChange] = useState(false);
+  const startedRef = useRef(false);
+  const markStarted = (field: string) => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    setHasUserChange(true);
+    track("calculator_started", { field });
+  };
   const set = <K extends keyof DeckInputs>(k: K, v: DeckInputs[K]) => {
-    if (!startedRef.current) {
-      startedRef.current = true;
-      track("calculator_started", { field: k });
-    }
+    markStarted(k);
     setInp((p) => ({ ...p, [k]: v }));
   };
   // Fires once per mount: activation is "reached a valid, code-compliant
   // result after changing inputs", not merely "loaded the page" (which page_view already covers).
-  const startedRef = useRef(false);
-  const resultReporter = useRef<ReturnType<typeof createResultReporter> | null>(null);
-  if (!resultReporter.current) resultReporter.current = createResultReporter(params => track("calculator_result_viewed", params));
+  const [reportResult] = useState(() => createResultReporter(params => track("calculator_result_viewed", params)));
   useEffect(() => {
-    resultReporter.current!(startedRef.current, r);
-  }, [r, cost]);
+    reportResult(hasUserChange, r);
+  }, [r, cost, reportResult, hasUserChange]);
 
   const headline = (() => {
     if (focus === "footing") return ["Footing", `${r.footingDiameterIn}″ dia. × ${r.footingDepthIn}″ deep`, `${r.footingLoadLb} lb/post · ${r.footingAreaSqft} ft² bearing`];
@@ -190,7 +193,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
           </p>
         </div>
 
-        <CostBreakdown cost={cost} decking={decking} onDecking={(value) => { if (!startedRef.current) { startedRef.current = true; track("calculator_started", { field: "decking" }); } setDecking(value); }} />
+        <CostBreakdown cost={cost} decking={decking} onDecking={(value) => { markStarted("decking"); setDecking(value); }} />
 
         {/* Pro upsell: turn this exact deck into a permit-ready packet. */}
         <div className="flex flex-col gap-3 border border-rust-line bg-rust-tint p-5 sm:flex-row sm:items-center sm:justify-between print:hidden">
