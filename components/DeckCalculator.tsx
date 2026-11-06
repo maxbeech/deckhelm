@@ -6,7 +6,7 @@ import { computeCost, DEFAULT_DECKING, type Decking } from "@/lib/cost";
 import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type JoistSize, type Spacing, type Species } from "@/lib/deck-tables";
 import { US_STATES } from "@/lib/frost";
 import { track } from "@/lib/openhelm-analytics";
-import { createResultReporter } from "@/lib/calculator-value";
+import { CALCULATOR_VALUE_EVENT, createResultReporter } from "@/lib/calculator-value";
 import FramingDiagram from "./FramingDiagram";
 import CostBreakdown from "./CostBreakdown";
 import CheckoutButton from "./CheckoutButton";
@@ -65,7 +65,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
   };
   // Fires once per mount: activation is "reached a valid, code-compliant
   // result after changing inputs", not merely "loaded the page" (which page_view already covers).
-  const [reportResult] = useState(() => createResultReporter(params => track("calculator_result_viewed", params)));
+  const [reportResult] = useState(() => createResultReporter(params => { track("calculator_result_viewed", params); track(CALCULATOR_VALUE_EVENT, params); }));
   useEffect(() => {
     reportResult(hasUserChange, r);
   }, [r, cost, reportResult, hasUserChange]);

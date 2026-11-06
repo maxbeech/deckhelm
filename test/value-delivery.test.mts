@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { computeDeck, DEFAULT_DECK } from "../lib/deck.ts";
-import { createResultReporter } from "../lib/calculator-value.ts";
+import { CALCULATOR_VALUE_EVENT, createResultReporter } from "../lib/calculator-value.ts";
 
 test("a valid seeded example does not establish visitor value", () => {
   const events: unknown[] = [];
@@ -25,4 +25,10 @@ test("the UI reports on result changes, including changes that keep the same joi
   const source = readFileSync(new URL("../components/DeckCalculator.tsx", import.meta.url), "utf8");
   assert.ok(source.includes("reportResult(hasUserChange, r)"));
   assert.ok(source.includes("}, [r, cost, reportResult, hasUserChange])"));
+});
+
+test("the new success event cannot mix with historical seeded-result diagnostics", () => {
+  assert.equal(CALCULATOR_VALUE_EVENT, "calculator_completed");
+  const source = readFileSync(new URL("../components/DeckCalculator.tsx", import.meta.url), "utf8");
+  assert.ok(source.includes("track(CALCULATOR_VALUE_EVENT, params)"));
 });

@@ -1,5 +1,7 @@
 import type { DeckResult } from "./deck";
 
+export const CALCULATOR_VALUE_EVENT = "calculator_completed";
+
 /** A seeded example is not evidence that a visitor completed their own calculation. */
 export function createResultReporter(emit: (params: { joist_size: string; valid: boolean }) => void) {
   let recorded = false;

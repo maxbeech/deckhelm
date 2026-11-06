@@ -115,3 +115,5 @@ The generated return modules come from OpenHelm/shared/src through Products/_ser
 `calculator_result_viewed` requires a visitor input change and a valid computed result. The seeded example and invalid custom designs do not count as delivered value; repeat edits count once per calculator mount.
 
 Generated Node analytics tests assert the empty error count without narrowing the mutable collection to `never[]`; storage-error checks remain unchanged.
+
+Delivered value uses the distinct `calculator_completed` event. It requires a real input change and a valid result; this prevents historical seeded `calculator_result_viewed` diagnostics from entering the new value total.

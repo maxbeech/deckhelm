@@ -2,6 +2,7 @@
 // lib/openhelm-analytics-mp.ts) and the event names this product's journey
 // instrumentation actually emits (DeckCalculator, CostBreakdown, LeadForm,
 // CheckoutButton, PlanStudio). Run: npm test
+import { CALCULATOR_VALUE_EVENT } from "../lib/calculator-value.ts";
 import { track, trackPageView, analyticsEnabled } from "../lib/openhelm-analytics.tsx";
 import { buyerRefFromToken } from "../lib/analytics-ref.ts";
 import { proToken, sessionIdFromToken } from "../lib/pro.ts";
@@ -30,6 +31,7 @@ check(
 const JOURNEY_EVENTS = [
   "calculator_started",
   "calculator_result_viewed",
+  CALCULATOR_VALUE_EVENT,
   "advanced_options_opened",
   "framing_plan_printed",
   "affiliate_link_clicked",

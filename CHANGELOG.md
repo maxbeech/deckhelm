@@ -281,3 +281,5 @@ See git log for the calculator engine, span tables, state pages, blog and Pro ch
 built before this changelog was introduced.
 
 Generated Node analytics tests assert the empty error count without narrowing the mutable collection to `never[]`; storage-error checks remain unchanged.
+
+Use a distinct `calculator_completed` value event so same-day historical seeded-result events cannot contaminate the success-only definition.
