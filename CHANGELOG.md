@@ -1,3 +1,8 @@
+## 2026-11-06: Exclude seeded calculator examples from value delivery
+
+- Require a real input change and a valid computed result for `calculator_result_viewed`, including cost-material edits.
+- Cover default examples, invalid custom designs, valid results, repeated edits and result changes with the same joist size.
+
 # Changelog
 
 ## 2026-11-06: active return measurement

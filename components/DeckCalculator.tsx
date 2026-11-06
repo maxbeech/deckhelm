@@ -6,6 +6,7 @@ import { computeCost, DEFAULT_DECKING, type Decking } from "@/lib/cost";
 import { BEAM_SIZES, JOIST_SIZES, SPECIES_LABEL, ftIn, type BeamSize, type JoistSize, type Spacing, type Species } from "@/lib/deck-tables";
 import { US_STATES } from "@/lib/frost";
 import { track } from "@/lib/openhelm-analytics";
+import { createResultReporter } from "@/lib/calculator-value";
 import FramingDiagram from "./FramingDiagram";
 import CostBreakdown from "./CostBreakdown";
 import CheckoutButton from "./CheckoutButton";
@@ -58,15 +59,13 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
     setInp((p) => ({ ...p, [k]: v }));
   };
   // Fires once per mount: activation is "reached a valid, code-compliant
-  // result", not merely "loaded the page" (which page_view already covers).
+  // result after changing inputs", not merely "loaded the page" (which page_view already covers).
   const startedRef = useRef(false);
-  const resultSeenRef = useRef(false);
+  const resultReporter = useRef<ReturnType<typeof createResultReporter> | null>(null);
+  if (!resultReporter.current) resultReporter.current = createResultReporter(params => track("calculator_result_viewed", params));
   useEffect(() => {
-    if (resultSeenRef.current) return;
-    if (!r.valid) return;
-    resultSeenRef.current = true;
-    track("calculator_result_viewed", { joist_size: r.joistSize ?? "none", valid: r.valid });
-  }, [r.valid, r.joistSize]);
+    resultReporter.current!(startedRef.current, r);
+  }, [r, cost]);
 
   const headline = (() => {
     if (focus === "footing") return ["Footing", `${r.footingDiameterIn}″ dia. × ${r.footingDepthIn}″ deep`, `${r.footingLoadLb} lb/post · ${r.footingAreaSqft} ft² bearing`];
@@ -191,7 +190,7 @@ export default function DeckCalculator({ initialState, focus }: { initialState?:
           </p>
         </div>
 
-        <CostBreakdown cost={cost} decking={decking} onDecking={setDecking} />
+        <CostBreakdown cost={cost} decking={decking} onDecking={(value) => { if (!startedRef.current) { startedRef.current = true; track("calculator_started", { field: "decking" }); } setDecking(value); }} />
 
         {/* Pro upsell: turn this exact deck into a permit-ready packet. */}
         <div className="flex flex-col gap-3 border border-rust-line bg-rust-tint p-5 sm:flex-row sm:items-center sm:justify-between print:hidden">
