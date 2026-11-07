@@ -119,3 +119,5 @@ Generated Node analytics tests assert the empty error count without narrowing th
 Delivered value uses the distinct `calculator_completed` event. It requires a real input change and a valid result; this prevents historical seeded `calculator_result_viewed` diagnostics from entering the new value total.
 
 2026-11-06: The shared GA bootstrap disables implicit page views before startup, so the explicit route tracker owns the initial and subsequent SPA page views. Product value and active-return events remain enabled.
+
+Page-view deduplication uses the actual browser URL at emission, preventing a stale React snapshot from double-counting URL hydration. The four-case Node check runs as `pageview-startup.check.mjs`, independently of Vitest discovery.
