@@ -8,8 +8,8 @@ import { IconCheck } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pricing: Permit-Ready Deck Plans",
-  description: "The DeckHelm calculator is free forever. Upgrade to a permit-ready deck plan PDF with a code-referenced framing plan, footing schedule and material list.",
+  title: "Pricing: $29 Permit-Ready Deck Plan",
+  description: "The deck calculator is free. The $29 permit-ready deck plan adds a code-referenced framing plan, footing and stair schedules, a material list and a permit submittal packet.",
   alternates: { canonical: `${SITE.url}/pricing` },
 };
 

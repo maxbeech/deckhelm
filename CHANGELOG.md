@@ -5,6 +5,13 @@
 
 # Changelog
 
+## 2026-11-10: Content lifecycle pass (railing kits guide, pricing metadata)
+
+- **Railing kits guide.** Replaced the undated "CPSC estimates around 6,000 a year" line with the source it comes from: a CPSC-based analysis of 2003 to 2007 emergency room data, labelled as a historical benchmark. Rewrote the meta description to name the five kit categories and the IRC 36-inch and 4-inch sphere rules.
+- **Publish date unchanged.** `test/blog-content.test.mts` pins the post list and the schema has no "updated" field, so the date stays as it was.
+- **Pricing metadata.** Title and description now state the $29 one-time plan and what it includes (framing plan, footing and stair schedules, material list, permit packet), matching the page's own headline.
+- **Not changed.** Oregon and Minnesota state pages (shared template, `noindex` by design) and the bare-host Nevada redirect (already 308 to www).
+
 ## 2026-11-06: active return measurement
 
 - Record first measured visits and intentional returns using the shared three-hour, seven-day browser contract.
