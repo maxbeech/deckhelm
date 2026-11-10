@@ -1793,6 +1793,90 @@ export const POSTS: Post[] = [
     { type: "p", text: "Planning a 2026 build around these numbers is mostly a sizing and sequencing exercise: figure out which zones matter to you, size the deck and beam for them from the start, and run the footprint through our [deck cost calculator](/calculators/deck-cost-calculator) before you commit to a final plan." }
   ]
 },
+{
+  slug: "how-many-deck-boards-do-you-need",
+  category: "Academy",
+  title: "How Many Deck Boards Do You Need? A Worked Example",
+  description: "How to work out how many deck boards to order from your deck's width and projection, with the 5.5 inch board, 1/4 inch gap and 10 percent waste allowance worked through on real sizes.",
+  keyword: "deck board calculator",
+  supportingKeywords: [
+    "how many deck boards do I need",
+    "how many boards for a deck",
+    "deck boards per square foot",
+    "decking boards needed",
+    "deck board waste factor",
+    "deck material calculator",
+    "16 foot deck boards",
+    "how much decking do I need",
+    "deck board count"
+  ],
+  date: "2026-11-10",
+  readMins: 8,
+  related: "deck-material-calculator",
+  howTo: false,
+  image: "/photos/blog/deck-joist-spacing-12-vs-16-vs-24.webp",
+  imageAlt: "A tape measure and red pencil laid across weathered deck boards, with screws and sawdust nearby",
+  body: [
+    { type: "p", text: "Ordering decking is the part of a build where a small arithmetic slip costs a second trip to the lumber yard. Order too few and the last few rows wait a week for a delivery; order too many and the spare boards sit under a tarp for a season. The count depends on three things most homeowners guess at: the real width of a deck board, the gap you leave between boards, and how much you should allow for cuts. This guide works through the sums on realistic deck sizes, using the same formula as DeckHelm's deck material calculator, so you can check the numbers the tool gives you." },
+    { type: "tldr", items: [
+      "A 5/4 x 6 board is about 5.5 inches wide once milled, so each board covers roughly 5.75 inches with a 1/4 inch gap, not the 6 inches on the label.",
+      "Lineal feet of board needed is the deck area multiplied by 12 divided by 5.75, which comes to about 2.09 lineal feet per square foot.",
+      "Add 10 percent for waste as a planning default, then round the total up to whole 16 foot boards.",
+      "A 12 by 16 foot deck (192 square feet) needs about 441 lineal feet with waste, which is 28 boards of 16 feet.",
+      "Treat the result as a planning figure: check a cut plan before you order, and recount if your gap or board width differs."
+    ] },
+    { type: "h2", text: "The short answer: area, then lineal feet, then boards" },
+    { type: "p", text: "Decking runs in lengths, so the count is not simply the deck's area divided by the area of one board. You need to know how many lineal feet of board will cover the surface, then divide that by the length you can buy. The lineal-foot figure comes from the width each board covers once it is laid. Multiply the deck's area by 12 inches per foot, divide by the covered width in inches, and you have the lineal feet of board needed with no waste. For a 5.5 inch board and a 1/4 inch gap, the covered width is 5.75 inches, so the factor is 12 divided by 5.75, about 2.087 lineal feet for every square foot of deck." },
+    { type: "p", text: "After that, two adjustments turn the figure into an order. The first is a waste allowance, which covers ends that are too short to use, boards split during fixing, and the occasional board you reject for cupping or a split end. The second is rounding: boards are sold in fixed lengths, so you divide your total lineal feet by the board length and round up. The DeckHelm calculator does exactly this, applying 10 percent waste to the lineal-foot figure and then dividing by 16 feet." },
+    { type: "h2", text: "Why 5.75 inches of coverage, not 6" },
+    { type: "p", text: "The most common mistake is to use the label. A board sold as 5/4 x 6 is not 6 inches wide on the deck. Retailers list the actual size as 1 inch thick by 5.5 inches wide, and a 16 foot [pressure-treated 5/4 x 6 board at Lowe's](https://www.lowes.com/pd/Severe-Weather-5-4-in-x-6-in-x-16-ft-Premium-Radius-Edge-Pressure-Treated-Lumber/5013086401) is listed with actual dimensions of 1 x 5.5 x 16 feet, for example. Using 6 inches plus the gap, a 6.25 inch covered width, under-counts the boards by about 8 percent over the whole deck, which is exactly the size of error that leaves you one board short on the last row." },
+    { type: "p", text: "The gap matters almost as much. Angi's guidance on [deck board spacing](https://www.angi.com/articles/how-much-space-between-deck-boards.htm) describes 1/4 inch as the usual recommendation for kiln-dried wood, which allows for seasonal movement and drainage. Add the gap to the 5.5 inch board width and you get the 5.75 inch figure the calculator uses. Most composite makers recommend a narrower gap, roughly 1/8 to 1/4 inch, so the count for composite decking changes slightly if you use a different gap or a board with a different actual width. The rule is always the same: lineal feet equals area times 12, divided by the board width plus the gap, then multiplied by your waste factor." },
+    { type: "h2", text: "Worked example: a 12 by 16 foot deck" },
+    { type: "p", text: "Take a 12 foot wide deck that projects 16 feet from the house. The area is 12 times 16, or 192 square feet. Multiply by 12 divided by 5.75 and you get about 400.7 lineal feet of board with no waste. Add 10 percent and the figure is about 440.8, which rounds to 441 lineal feet. Divided by 16 foot boards, that is 27.6 boards, so you round up to 28. Those 28 boards are 448 lineal feet in total, which leaves about 7 feet of slack against the 441 feet of need. That margin is small, which is the point: the 10 percent allowance is already in the number." },
+    { type: "p", text: "The same arithmetic on a range of common sizes gives the following. Every figure below includes the 10 percent waste allowance and assumes 16 foot boards." },
+    { type: "table", caption: "Board count for common deck sizes, DeckHelm material formula (5.5 inch board, 1/4 inch gap, 10 percent waste, 16 foot boards)", headers: ["Deck (width x projection)", "Area (sq ft)", "Lineal ft incl. waste", "16 ft boards to order"], rows: [
+      ["10 x 10 ft", "100", "230", "15"],
+      ["12 x 12 ft", "144", "331", "21"],
+      ["12 x 16 ft", "192", "441", "28"],
+      ["16 x 20 ft", "320", "735", "46"]
+    ] },
+    { type: "p", text: "The table makes one pattern clear. Board count scales with area, not with perimeter, so doubling the projection of a deck roughly doubles the boards you need, while adding railing or stairs leaves the decking count unchanged. Stairs and railings have their own material lists, which the same calculator covers separately." },
+    { type: "h2", text: "How much waste to allow" },
+    { type: "p", text: "Waste is where the sources disagree, and the right figure depends on the layout. The calculator uses 10 percent, which is a common default for a simple rectangular deck with boards running one way. Trex's [guidance on how many deck boards you need](https://www.trex.com/deck-ideas/how-many-deck-boards-do-i-need-/) suggests a smaller allowance, around 5 percent, which assumes careful cutting and a straightforward layout. Other calculator guides we reviewed put diagonal patterns nearer 15 percent, and suggest 8 to 10 percent for cedar, because boards vary more in colour and straightness. Treat those as rules of thumb rather than standards." },
+    { type: "p", text: "A practical rule: use 10 percent for a rectangular deck with boards running the long way, 15 percent for diagonal or heavily cut layouts, and no less than 8 percent for cedar or any board you plan to select closely for colour. If you want the diagonal figure from the same calculator, multiply the lineal-foot number by 1.15 and divide by 1.10 before rounding. For the 12 by 16 deck that gives about 461 lineal feet, or 29 boards of 16 feet." },
+    { type: "h2", text: "What the number does not capture" },
+    { type: "p", text: "A board count is a planning figure, not a cut list. The formula treats all the waste as one pool and assumes that every offcut can be used somewhere else on the deck. In practice, boards that start or finish at the edge of a run leave ends that are too short for a second run, and a long deck may need boards to be joined at a joist, which adds cuts. If you want accuracy beyond the planning number, sketch the board runs on the joist layout and count each row. The count will usually come out close to the formula, but the cut plan is what tells you which 16 foot boards to use for which rows." },
+    { type: "p", text: "Board width and gap are the two inputs most likely to change. If your boards are a different actual width, substitute your width for 5.5 inches in the formula: lineal feet equals area times 12, divided by the board width plus the gap, times 1.1. A board that is 5.25 inches wide with a 1/4 inch gap covers 5.5 inches, which raises the lineal-foot figure by about 4.5 percent over the 5.75 inch version. Always check the actual width on the label or the manufacturer's data sheet rather than the nominal size, since the two differ on almost every treated and composite board." },
+    { type: "p", text: "Screws follow the same logic. The DeckHelm calculator estimates deck screws at about 3.5 per square foot, which is a rough figure for two face screws per joist crossing. That estimate is a starting point for buying a box, not a fastener schedule. Check the boards' own installation guidance for fastener type and spacing, and the [deck screws comparison](/blog/deck-screws-galvanized-vs-stainless) for the coatings that suit treated lumber." },
+    { type: "h2", text: "Where board count sits in the wider estimate" },
+    { type: "p", text: "Decking is a major material line on most wood decks, so an accurate count is worth the effort. Once you have the board count, the cost follows from the board price per lineal foot and the rest of the materials. For a broader picture of what the surface costs, the [deck cost per square foot guide](/blog/deck-cost-per-square-foot) breaks down decking alongside framing, footings and labour, and the [composite decking vs wood comparison](/blog/composite-decking-vs-wood-cost) shows how the price per board changes over a twenty year ownership period." },
+    { type: "p", text: "The framing sets the board layout too. Joist spacing determines how the decking is supported, and the [joist spacing comparison for 12, 16 and 24 inches](/blog/deck-joist-spacing-12-vs-16-vs-24) explains why 16 inch centres are the common default. If your joists run in a different direction from your boards, the cut plan changes, so settle the framing before you finalise the order." },
+    { type: "h2", text: "Common mistakes when ordering deck boards" },
+    { type: "ul", items: [
+      "Using the nominal 6 inch width instead of the actual 5.5 inch width, which under-counts the boards by about 8 percent once the gap is included.",
+      "Forgetting the gap, so the boards are counted as covering the full width when each one actually covers 5.75 inches.",
+      "Ordering exactly the figure with no waste, which leaves no spare when a board splits during fixing.",
+      "Counting the picture-frame border boards separately from the field, then ordering the field count with no allowance for the border.",
+      "Mixing board lots from different mills, which can change the actual width and colour in the same deck."
+    ] },
+    { type: "h2", text: "A quick checklist before you order" },
+    { type: "ol", items: [
+      "Measure the deck's width and projection, and confirm the area in square feet.",
+      "Confirm the actual board width from the manufacturer's data sheet, not the label.",
+      "Choose the gap for your decking type, usually 1/4 inch for kiln-dried wood.",
+      "Calculate lineal feet as area times 12, divided by the covered width, then add your waste allowance.",
+      "Round up to whole boards of the length you can buy, and buy from one lot where possible."
+    ] },
+    { type: "faq", items: [
+      { q: "How many deck boards do I need for a 12 by 12 deck?", a: "About 21 boards of 16 feet, using a 5.5 inch actual board width, a 1/4 inch gap and 10 percent waste. The 144 square feet of deck needs roughly 331 lineal feet of board, which rounds up to 21 sixteen-foot lengths." },
+      { q: "Should I buy extra decking boards?", a: "Yes, a waste allowance is normal. The calculator's 10 percent default is a sensible starting point for a simple rectangular deck. Use more for diagonal layouts and for cedar, and keep a few spare boards for the future repairs that every deck needs eventually." },
+      { q: "Does the board count change for composite decking?", a: "It can. The count depends on the actual width and gap of the board you buy, so check the composite manufacturer's data sheet and substitute its covered width into the formula. Many composite boards have a different width from pressure-treated 5/4 x 6, so do not reuse a wood count for a composite order." },
+      { q: "Is the calculator's count exact?", a: "No. It is a planning figure that assumes waste can be pooled across the whole deck. Sketch the board runs on your joist layout for a cut plan, and treat the calculator's result as the order quantity to check against that plan." },
+      { q: "Why does the count use 16 foot boards?", a: "Sixteen foot lengths are a common size at building suppliers and cover most deck spans without a join. If your supplier stocks a different length, divide the lineal-foot figure by that length and round up instead." }
+    ] },
+    { type: "p", text: "Get the board count right on paper and the rest of the order is easy: the joists, footings and fasteners all follow from the framing plan. Run your deck dimensions through the [deck material calculator](/calculators/deck-material-calculator) to see the board count and the material budget together, then sketch the board runs before you place the order." }
+  ]
+},
 ];
 
 export function getPost(slug: string): Post | undefined {
