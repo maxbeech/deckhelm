@@ -75,6 +75,17 @@ export default async function CalcPage({ params }: { params: Promise<{ slug: str
         </ul>
       </section>
 
+      {c.guides && c.guides.length > 0 && (
+        <section className="mt-6 border border-line bg-card p-6">
+          <h2 className="font-display text-lg font-semibold text-ink">Read the guides behind this calculator</h2>
+          <ul className="mt-3 space-y-2 text-sm">
+            {c.guides.map((g) => (
+              <li key={g.href}><Link href={g.href} className="text-rust underline-offset-2 hover:underline">{g.title} →</Link></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section className="mt-6 border border-rust-line bg-rust-tint p-6">
         <h2 className="font-display text-lg font-semibold text-ink">Want a permit-ready deck plan?</h2>
         <p className="mt-2 text-sm text-ink-soft">

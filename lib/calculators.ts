@@ -14,6 +14,8 @@ export interface Calc {
   intro: string;
   notes: string[];
   focus: Focus;
+  /** Optional internal links to the guides that explain this calculator's numbers. */
+  guides?: { href: string; title: string }[];
 }
 
 export const CALCS: Calc[] = [
@@ -31,6 +33,12 @@ export const CALCS: Calc[] = [
       "Spans are clear, face-of-support to face-of-support, for No. 2 grade lumber at 40 psf live + 10 psf dead load.",
       "Tighter spacing spans further: a 2x8 Southern Pine goes 13'1\" at 12\" o.c. but only 9'8\" at 24\" o.c.",
       "Joist cantilevers past the beam are limited to 1/4 of the back-span (IRC R507.6.1).",
+      "The tables are the 2018/2021 IRC and AWC DCA6 values. Local amendments can be stricter, so confirm with your building department before you order lumber.",
+    ],
+    guides: [
+      { href: "/blog/how-far-can-a-deck-joist-span", title: "How Far Can a Deck Joist Span?" },
+      { href: "/blog/2x8-vs-2x10-deck-joists", title: "2x8 vs 2x10 Deck Joists: Which Should You Use?" },
+      { href: "/blog/deck-joist-spacing-12-vs-16-vs-24", title: "Deck Joist Spacing: 12 vs 16 vs 24 Inches" },
     ],
   },
   {

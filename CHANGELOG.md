@@ -5,6 +5,13 @@
 
 # Changelog
 
+## 2026-11-19: Joist span calculator refresh (guides, code caveat)
+
+- **Guide links.** The joist span calculator now links to three guides that explain its numbers: how far a joist spans, 2x8 vs 2x10, and 12/16/24 inch spacing. Calculators can list guides through an optional `guides` field, rendered by `app/calculators/[slug]/page.tsx`.
+- **Code caveat.** Notes say the tables are the 2018/2021 IRC and AWC DCA6 values and that local amendments can be stricter.
+- **Test.** `test/calculator-guides.test.mts` (added to `npm test`) fails if a calculator links to a guide slug that does not exist.
+- **Not changed.** The deck footing calculator stays as a separate tool page. It is linked from several guides and is not a duplicate of `deck-footing-size-and-depth`.
+
 ## 2026-11-10: Content lifecycle pass (railing kits guide, pricing metadata)
 
 - **Railing kits guide.** Replaced the undated "CPSC estimates around 6,000 a year" line with the source it comes from: a CPSC-based analysis of 2003 to 2007 emergency room data, labelled as a historical benchmark. Rewrote the meta description to name the five kit categories and the IRC 36-inch and 4-inch sphere rules.
