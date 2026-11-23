@@ -1936,7 +1936,7 @@ export const POSTS: Post[] = [
       ["Total", "$2,010", "$5,265", ""],
       ["Per square foot", "$10.50", "$27.40", "total divided by 192 sq ft"]
     ]},
-    { type: "p", text: "Look at the substructure line. It is the largest single item on a pressure-treated deck, and it is the line most people forget to budget for, because it is hidden under the decking. The joists, beam, posts, hangers, flashing and ledger hardware together cost more than the boards on top." },
+    { type: "p", text: "Look at the substructure line. It's the biggest single item on a pressure-treated deck, and people often overlook its importance due to its concealed location. The joists, beam, posts, hangers, flashing and ledger hardware together cost more than the boards on top." },
     { type: "h2", text: "Worked Example Two: Composite With Railing and Stairs" },
     { type: "p", text: "Now keep the same footprint and six posts, but switch to composite decking, add a guard on the three open sides and three stair treads. The guard length is the width plus twice the projection, which is 12 ft plus 32 ft, or 44 linear feet. The guard is the most variable line in the whole estimate, because a glass or aluminium system can cost several times a basic wood rail." },
     { type: "table", caption: "Worked example: 12 by 16 ft composite deck with railing and three stair treads", headers: ["Line item", "Low", "High", "Basis"], rows: [
