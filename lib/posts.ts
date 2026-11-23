@@ -1877,6 +1877,110 @@ export const POSTS: Post[] = [
     { type: "p", text: "Get the board count right on paper and the rest of the order is easy: the joists, footings and fasteners all follow from the framing plan. Run your deck dimensions through the [deck material calculator](/calculators/deck-material-calculator) to see the board count and the material budget together, then sketch the board runs before you place the order." }
   ]
 },
+{
+  slug: "deck-cost-calculator-how-it-works",
+  category: "Academy",
+  title: "Deck Cost Calculator: How the Estimate Is Built",
+  description: "How a deck cost calculator builds its estimate line by line, with two worked examples for a 12 by 16 ft deck in pressure-treated and composite.",
+  keyword: "deck cost calculator",
+  supportingKeywords: [
+    "deck cost estimator",
+    "how much does a 12x16 deck cost",
+    "deck material cost calculator",
+    "composite deck cost per square foot",
+    "pressure treated deck cost per square foot",
+    "deck railing cost per linear foot",
+    "deck cost estimate by size",
+    "DIY deck cost breakdown",
+    "deck permit cost allowance"
+  ],
+  date: "2026-11-23",
+  readMins: 8,
+  related: "deck-cost-calculator",
+  howTo: false,
+  image: "/photos/blog/how-much-does-a-deck-cost.webp",
+  imageAlt: "Framed deck under construction, used to illustrate the line items a deck cost calculator estimates",
+  body: [
+    { type: "p", text: "A deck cost calculator is only as useful as the lines it adds up. Type in a size and a material and you get one number, but that number hides a dozen assumptions about boards, posts, footings and labour. If you do not know what those assumptions are, you cannot tell whether a quote is fair or whether the budget you have written down is missing something." },
+    { type: "p", text: "This guide opens up the estimate behind the DeckHelm deck cost calculator. It shows the unit rates, how each line is sized, and two worked examples for the same 12 ft by 16 ft footprint, one in pressure-treated pine and one in composite with a railing and stairs. The numbers are real outputs of the calculator's cost model, so you can check them yourself." },
+    { type: "tldr", items: [
+      "The calculator builds the estimate from four to six line items: decking, substructure, footings, railing, stairs and a permit allowance.",
+      "The low end is a DIY material budget. The high end is a contractor-installed price with labour included.",
+      "A 12 ft by 16 ft pressure-treated deck comes out at $2,010 to $5,265, or $10.50 to $27.40 per square foot.",
+      "The same footprint in composite with a guard and three stair treads comes out at $3,720 to $9,915, or $19.40 to $51.60 per square foot.",
+      "Railing and composite decking move the total more than any other inputs, so check those before you check anything else."
+    ]},
+    { type: "h2", text: "What Goes Into a Deck Cost Estimate?" },
+    { type: "p", text: "The calculator asks for five things: the width and projection of the deck, the decking material, the number of posts, whether a guard is needed on the open sides, and how many stair treads you need. From those it works out the deck area in square feet, the board count, and a cost for each part of the build. Each rate is a planning figure, not a supplier price list, so treat the result as a range to plan against rather than a quote to sign." },
+    { type: "table", caption: "Unit rates behind the DeckHelm deck cost estimate (US dollars)", headers: ["Line item", "Low (DIY materials)", "High (contractor installed)", "Charged by"], rows: [
+      ["Decking, pressure-treated pine", "$3", "$9", "per sq ft of deck"],
+      ["Decking, cedar or redwood", "$6", "$14", "per sq ft of deck"],
+      ["Decking, composite", "$8", "$18", "per sq ft of deck"],
+      ["Decking, hardwood (ipe or cumaru)", "$11", "$24", "per sq ft of deck"],
+      ["Substructure: joists, beam, posts, hardware", "$6", "$13", "per sq ft of deck"],
+      ["Footings (concrete piers)", "$35", "$90", "per post"],
+      ["Railing or guard", "$15", "$60", "per linear foot"],
+      ["Stairs", "$30", "$95", "per tread"],
+      ["Permit, fasteners and misc", "$75", "$500", "flat allowance"]
+    ]},
+    { type: "p", text: "Two details matter more than they look. Decking is charged on the deck's surface area, so a 12 ft by 16 ft deck is 192 square feet whatever shape the framing takes. And every money figure in the estimate is rounded to the nearest $5, which keeps the output readable without pretending to more precision than a planning tool can give." },
+    { type: "h2", text: "What Do the Low and High Ends Actually Mean?" },
+    { type: "p", text: "The low end is what the materials cost if you build the deck yourself. It leaves out labour entirely, so it is the floor of a DIY budget and not what you would pay a crew. The high end is what a contractor would typically charge installed, with labour, footings and permits included. Most real projects land between the two, and the spread is widest for composite and hardwood, where the price of the boards moves the most." },
+    { type: "h2", text: "Worked Example One: 12 by 16 ft Pressure-Treated Deck" },
+    { type: "p", text: "Take a 12 ft wide, 16 ft projection deck in pressure-treated pine, with six posts, no guard and no stairs. The decking area is 192 square feet. The board calculation uses 5.5-inch boards with a quarter-inch gap, which covers 5.75 inches per board, plus 10 percent for cutting waste. That gives 441 lineal feet of board, which rounds up to 28 boards of 16 ft. The estimate also allows about 672 deck screws, at roughly 3.5 per square foot." },
+    { type: "table", caption: "Worked example: 12 by 16 ft pressure-treated deck, six posts, no guard, no stairs", headers: ["Line item", "Low", "High", "Basis"], rows: [
+      ["Decking", "$575", "$1,730", "192 sq ft, 28 boards of 16 ft"],
+      ["Substructure", "$1,150", "$2,495", "192 sq ft of framing"],
+      ["Footings", "$210", "$540", "6 posts"],
+      ["Permit, fasteners and misc", "$75", "$500", "allowance"],
+      ["Total", "$2,010", "$5,265", ""],
+      ["Per square foot", "$10.50", "$27.40", "total divided by 192 sq ft"]
+    ]},
+    { type: "p", text: "Look at the substructure line. It is the largest single item on a pressure-treated deck, and it is the line most people forget to budget for, because it is hidden under the decking. The joists, beam, posts, hangers, flashing and ledger hardware together cost more than the boards on top." },
+    { type: "h2", text: "Worked Example Two: Composite With Railing and Stairs" },
+    { type: "p", text: "Now keep the same footprint and six posts, but switch to composite decking, add a guard on the three open sides and three stair treads. The guard length is the width plus twice the projection, which is 12 ft plus 32 ft, or 44 linear feet. The guard is the most variable line in the whole estimate, because a glass or aluminium system can cost several times a basic wood rail." },
+    { type: "table", caption: "Worked example: 12 by 16 ft composite deck with railing and three stair treads", headers: ["Line item", "Low", "High", "Basis"], rows: [
+      ["Decking, composite", "$1,535", "$3,455", "192 sq ft, 28 boards of 16 ft"],
+      ["Substructure", "$1,150", "$2,495", "192 sq ft of framing"],
+      ["Footings", "$210", "$540", "6 posts"],
+      ["Railing or guard", "$660", "$2,640", "44 linear feet"],
+      ["Stairs", "$90", "$285", "3 treads"],
+      ["Permit, fasteners and misc", "$75", "$500", "allowance"],
+      ["Total", "$3,720", "$9,915", ""],
+      ["Per square foot", "$19.40", "$51.60", "total divided by 192 sq ft"]
+    ]},
+    { type: "p", text: "Compared with the pressure-treated version, the composite decking alone adds about $1,725 to the high end, and the railing adds up to $2,640 more. That is why the same 192 square feet can produce a total that is nearly double on the high side once the railing and stairs are included." },
+    { type: "h2", text: "How Do These Figures Compare With Published 2026 Guides?" },
+    { type: "p", text: "Published 2026 cost guides disagree quite a lot. Across the guides we reviewed, installed pressure-treated decks run from roughly $25 to $40 per square foot and installed composite from about $30 to $60, though some sources give wider ranges. [NerdWallet's 2026 deck cost guide](https://www.nerdwallet.com/home-ownership/home-improvement/learn/cost-to-build-deck) puts a typical whole-deck project between $9,000 and $20,000, with an average near $14,000. [Advantage Lumber's 2026 cost article](https://blog.advantagelumber.com/2026/03/04/how-much-does-it-cost-to-build-a-deck-in-2026/) and [Angi's pressure-treated decking cost guide](https://angi.com/articles/pressure-treated-decking-cost.htm) cover the same material choice from a lumber and contractor angle. Most of these guides come from contractor-marketing and lead-generation sites, so treat them as directional rather than independent survey data." },
+    { type: "p", text: "Set against that, the calculator's high-end figures sit at the lower side of the installed ranges. Its pressure-treated high end is $27.40 per square foot, which is within the installed range but close to its floor, and its composite high end is $51.60. A 192 square foot deck is also smaller than many of the projects those national averages describe. Use the calculator to set the shape of the budget, then get local quotes, because labour rates vary a great deal by region." },
+    { type: "quote", text: "The permit, fasteners and misc line is an allowance, not a quote. It is the one line in the estimate that is not sized from your deck.", attribution: "DeckHelm cost estimator notes" },
+    { type: "h2", text: "Where the Calculator Is Weakest" },
+    { type: "p", text: "A planning tool can only model what it is given, so it is worth knowing what it leaves out. It uses one set of unit rates for the whole country, so it cannot show regional labour differences. It does not model site slope, demolition of an existing deck, or built-in seating and lighting. Footings are priced per post, not by diameter or depth, so a deck in a deep-frost state will cost more than the footing line suggests. For that, see [deck footing size and depth](/blog/deck-footing-size-and-depth) and check your frost depth before you dig." },
+    { type: "h2", text: "How Should You Use the Estimate Before Getting Quotes?" },
+    { type: "ol", items: [
+      "Measure the deck's width and projection in feet, and count the posts your framing plan needs.",
+      "Decide whether a guard is required on the open sides and how many stair treads you need.",
+      "Run the calculator twice, once in pressure-treated and once in your preferred composite, so you see the spread between materials.",
+      "Use the high end as your budget ceiling and the low end as the minimum you should expect to pay for materials.",
+      "Ask at least three contractors for a line-by-line quote and compare each line against the estimate, not just the total."
+    ]},
+    { type: "h2", text: "Common Mistakes When Reading a Deck Cost Estimate" },
+    { type: "ul", items: [
+      "Comparing the low DIY figure with a contractor quote. They include different things, so compare like with like.",
+      "Forgetting the substructure line, which is larger than most people expect on a pressure-treated deck.",
+      "Treating the railing as a small extra when it can rival the decking cost on a composite build.",
+      "Ignoring frost depth and regional labour rates, both of which the calculator treats as fixed.",
+      "Budgeting for the permit at the allowance rather than checking your local building department's actual fee."
+    ]},
+    { type: "faq", items: [
+      { q: "Is the deck cost calculator accurate enough to budget with?", a: "It is accurate enough to set a planning range and to show which lines drive the total. It is not a quote. Use the high end as a ceiling, then get local contractor quotes that match the same scope." },
+      { q: "Why does the low end leave out labour?", a: "The low end is meant to show what a DIY builder would spend on materials. Labour is what the high end adds, so the two together show the gap between building it yourself and hiring it out." },
+      { q: "Does the calculator include the permit?", a: "It includes a permit, fasteners and miscellaneous allowance of $75 to $500. That is a flat allowance, not your local fee. Check your building department for the real figure before you apply." },
+      { q: "Why is composite so much more expensive than pressure-treated?", a: "Composite boards cost more per square foot than pressure-treated pine, and the gap widens on the high end where installed prices reflect premium boards and fasteners. The substructure stays about the same, so the difference sits mainly in the decking and railing lines." }
+    ]},
+    { type: "p", text: "To see your own numbers, enter your deck's size and material into the [deck cost calculator](/calculators/deck-cost-calculator). If you are weighing the full project, read [how much does it cost to build a deck](/blog/how-much-does-a-deck-cost) for the wider picture, [composite decking vs wood](/blog/composite-decking-vs-wood-cost) for the material trade-off, and [is it cheaper to build your own deck](/blog/is-it-cheaper-to-build-your-own-deck) before you decide who does the work." },
+  ]
+},
 ];
 
 export function getPost(slug: string): Post | undefined {
